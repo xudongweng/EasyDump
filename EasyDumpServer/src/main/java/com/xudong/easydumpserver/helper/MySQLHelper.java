@@ -38,7 +38,6 @@ public class MySQLHelper {
     }
     
     public byte getConnection(){
-        String invokeinfo="getConnection():";
         try{
             Class.forName(this.driver);
             Connection conn = DriverManager.getConnection(this.url,this.user,this.password);
@@ -48,38 +47,36 @@ public class MySQLHelper {
             }else
                 return -1;
         } catch(ClassNotFoundException e) {
-            log.error(invokeinfo + e.toString());
+            log.error(e.toString());
         } catch(SQLException e) {
-            log.error(invokeinfo + e.toString());
+            log.error(e.toString());
         }catch (Exception e) {
-            log.error(invokeinfo + e.toString());
+            log.error(e.toString());
         }
         return -1;
     }
     
     public RowSet getAllDB(){
-        String invokeinfo="getAllDB():";
         try{
             Class.forName(this.driver);
             Connection conn = DriverManager.getConnection(this.url,this.user,this.password);
             if(!conn.isClosed()){
                 Statement stmt = conn.createStatement(); //创建语句对象，用以执行sql语言
                 ResultSet rs = stmt.executeQuery("show databases"); 
-                CachedRowSet rowset = new CachedRowSetImpl();
-                rowset.populate(rs);
+
                 rs.close();
                 stmt.close();
                 conn.close();
-                return rowset;
+                return null;
             }else
                 return null;
             
         } catch(ClassNotFoundException e) {
-            log.error(invokeinfo + e.toString());
+            log.error(e.toString());
         } catch(SQLException e) {
-            log.error(invokeinfo + e.toString());
+            log.error(e.toString());
         }catch (Exception e) {
-            log.error(invokeinfo + e.toString());
+            log.error(e.toString());
         }
         return null;
     }

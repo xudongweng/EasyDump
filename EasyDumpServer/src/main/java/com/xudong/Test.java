@@ -6,7 +6,7 @@
 package com.xudong;
 
 import com.xudong.easydumpserver.helper.MySQLHelper;
-import java.io.File;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
 import org.apache.log4j.Logger;
@@ -20,7 +20,6 @@ import org.apache.log4j.Logger;
 public class Test {
     public static void main(String[] args){
         
-        
         Logger log=Logger.getLogger(Test.class);
         log.trace("我是logger1，trace");
         log.debug("我是logger1，debug");
@@ -29,12 +28,12 @@ public class Test {
         log.error("我是logger1，error");
         log.fatal("我是logger1，fatal");
         
-        //System.out.println(Test.class.getResource(""));
+        System.out.println(Test.class.getResource(""));
         Locale myLocale = Locale.getDefault(Locale.Category.FORMAT);
         ResourceBundle rb = ResourceBundle.getBundle("config",myLocale);
         System.out.println(rb.getString("mysql.server"));
         MySQLHelper mysqlcom=new MySQLHelper();
-        mysqlcom.setURL(rb.getString("mysql.server"),rb.getString("mysql.port"));
-        System.out.println(mysqlcom.getConnection(rb.getString("mysql.user"), rb.getString("mysql.password")));
+        mysqlcom.setURL(rb.getString("mysql.server"),rb.getString("mysql.port"),rb.getString("mysql.user"), rb.getString("mysql.password"));
+        System.out.println(mysqlcom.getConnection());
     }
 }
