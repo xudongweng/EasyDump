@@ -63,7 +63,9 @@ public class MySQLHelper {
             if(!conn.isClosed()){
                 Statement stmt = conn.createStatement(); //创建语句对象，用以执行sql语言
                 ResultSet rs = stmt.executeQuery("show databases"); 
-
+                while(rs.next()){
+                    System.out.println(rs.getString(1));
+                }
                 rs.close();
                 stmt.close();
                 conn.close();
