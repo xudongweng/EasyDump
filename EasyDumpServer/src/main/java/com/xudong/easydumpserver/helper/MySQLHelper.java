@@ -15,7 +15,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.sql.RowSet;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.log4j.Logger;
 
 public class MySQLHelper {
@@ -31,7 +32,7 @@ public class MySQLHelper {
         this.log=Logger.getLogger(MySQLHelper.class);
     }
     
-    public void setURL(String user,String password,String server,String port){
+    public void setURL(String server,String port,String user,String password){
         this.url=this.urlhead+server+":"+port+this.urltail;
         this.user=user;
         this.password=password;
@@ -56,20 +57,21 @@ public class MySQLHelper {
         return -1;
     }
     
-    public RowSet getAllDB(){
+    public List getAllDB(){
         try{
             Class.forName(this.driver);
             Connection conn = DriverManager.getConnection(this.url,this.user,this.password);
+            List dblist=new ArrayList();
             if(!conn.isClosed()){
                 Statement stmt = conn.createStatement(); //创建语句对象，用以执行sql语言
                 ResultSet rs = stmt.executeQuery("show databases"); 
                 while(rs.next()){
-                    System.out.println(rs.getString(1));
+                    dblist.add(rs.getString(1));
                 }
                 rs.close();
                 stmt.close();
                 conn.close();
-                return null;
+                return dblist;
             }else
                 return null;
             
@@ -82,4 +84,33 @@ public class MySQLHelper {
         }
         return null;
     }
+    
+    public List getAllTables(String db){
+        try{
+            Class.forName(this.driver);
+            Connection conn = DriverManager.getConnection(this.url,this.user,this.password);
+            List dblist=new ArrayList();
+            if(!conn.isClosed()){
+                Statement stmt = conn.createStatement(); //创建语句对象，用以执行sql语言
+                ResultSet rs = stmt.executeQuery("show tables from "+db); 
+                while(rs.next()){
+                    dblist.add(rs.getString(1));
+                }
+                rs.close();
+                stmt.close();
+                conn.close();
+                return dblist;
+            }else
+                return null;
+            
+        } catch(ClassNotFoundException e) {
+            log.error(e.toString());
+        } catch(SQLException e) {
+            log.error(e.toString());
+        }catch (Exception e) {
+            log.error(e.toString());
+        }
+        return null;
+    }
+    
 }

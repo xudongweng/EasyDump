@@ -9,7 +9,6 @@ import com.xudong.easydumpserver.helper.MySQLHelper;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
-import org.apache.log4j.Logger;
 
 
 
@@ -23,9 +22,9 @@ public class Test {
         //System.out.println(Test.class.getResource(""));
         Locale myLocale = Locale.getDefault(Locale.Category.FORMAT);
         ResourceBundle rb = ResourceBundle.getBundle("config",myLocale);
-        System.out.println(rb.getString("mysql.server"));
+        //System.out.println(rb.getString("mysql.server"));
         MySQLHelper mysqlcom=new MySQLHelper();
         mysqlcom.setURL(rb.getString("mysql.server"),rb.getString("mysql.port"),rb.getString("mysql.user"), rb.getString("mysql.password"));
-        System.out.println(mysqlcom.getConnection());
+        System.out.println(mysqlcom.getAllTables("mysql"));
     }
 }
