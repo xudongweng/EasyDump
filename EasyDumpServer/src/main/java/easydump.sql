@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80016
 File Encoding         : 65001
 
-Date: 2019-08-24 23:03:51
+Date: 2019-08-25 20:43:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,7 +42,7 @@ CREATE TABLE `databases` (
   `password` varchar(20) NOT NULL,
   `port` mediumint(5) unsigned NOT NULL,
   `backuppath` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'backup',
-  `strategy` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0:getLockDB,1:getUnlockDB,2:getOnlyStruct,3:getOnlyData',
+  `strategy` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0:getLockDB,1:getUnlockDB,2:getOnlyStruct,3:getOnlyData,4:getSplitTables',
   `backuptable` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0:不指定备份表,1:指定备份表',
   `igonretable` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0:不指定忽略表,1:指定忽略表',
   PRIMARY KEY (`id`)

@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author sheriff
  */
-public class MySQLDumpArrObject {
+public class DumpArrObject {
     private final List<String> arrDump=new ArrayList<>();//mysqldump字符串集合
     public void addDump(String dump){
         this.arrDump.add(dump);
