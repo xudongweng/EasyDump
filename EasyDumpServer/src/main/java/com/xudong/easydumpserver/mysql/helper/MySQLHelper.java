@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.xudong.easydumpserver.helper;
+package com.xudong.easydumpserver.mysql.helper;
 
 /**
  *
@@ -20,9 +20,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 public class MySQLHelper {
-    private String driver="com.mysql.cj.jdbc.Driver";
-    private String urlhead="jdbc:mysql://";
-    private String urltail="?serverTimezone=UTC";
+    private final String driver="com.mysql.cj.jdbc.Driver";
+    private final String urlhead="jdbc:mysql://";
+    private final String urltail="?serverTimezone=UTC";
     private String url;
     private String user;
     private String password;

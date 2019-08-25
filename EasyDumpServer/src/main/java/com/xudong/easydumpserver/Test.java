@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.xudong;
+package com.xudong.easydumpserver;
 
-import com.xudong.easydumpserver.helper.MySQLHelper;
+import com.xudong.easydumpserver.mysql.helper.MySQLHelper;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
