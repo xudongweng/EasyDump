@@ -1,2 +1,5 @@
-com\xudong\Test.class
-com\xudong\easydumpserver\helper\MySQLHelper.class
+com\xudong\easydumpserver\mysql\BackupStrategy.class
+com\xudong\easydumpserver\mysql\model\DumpArrObject.class
+com\xudong\easydumpserver\mysql\BackupInfo.class
+com\xudong\easydumpserver\mysql\helper\MySQLHelper.class
+com\xudong\easydumpserver\Test.class

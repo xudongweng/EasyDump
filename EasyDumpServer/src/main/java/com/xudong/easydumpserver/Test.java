@@ -6,9 +6,14 @@
 package com.xudong.easydumpserver;
 
 import com.xudong.easydumpserver.mysql.helper.MySQLHelper;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 
 
@@ -25,6 +30,8 @@ public class Test {
         //System.out.println(rb.getString("mysql.server"));
         MySQLHelper mysqlcom=new MySQLHelper();
         mysqlcom.setURL(rb.getString("mysql.server"),rb.getString("mysql.port"),rb.getString("mysql.user"), rb.getString("mysql.password"));
-        System.out.println(mysqlcom.getAllTables("mysql"));
+        List list=mysqlcom.queryAll("select * from easydump.databases");
+        
+        
     }
 }

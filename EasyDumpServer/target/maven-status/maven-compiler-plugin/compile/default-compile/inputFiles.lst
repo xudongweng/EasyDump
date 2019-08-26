@@ -1,2 +1,5 @@
-E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\xudong\Test.java
-E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\xudong\easydumpserver\helper\MySQLHelper.java
+E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\xudong\easydumpserver\Test.java
+E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\xudong\easydumpserver\mysql\BackupStrategy.java
+E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\xudong\easydumpserver\mysql\model\DumpArrObject.java
+E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\xudong\easydumpserver\mysql\helper\MySQLHelper.java
+E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\xudong\easydumpserver\mysql\BackupInfo.java

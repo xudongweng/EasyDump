@@ -13,10 +13,13 @@ package com.xudong.easydumpserver.mysql.helper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.log4j.Logger;
 
 public class MySQLHelper {
@@ -45,8 +48,7 @@ public class MySQLHelper {
             if(!conn.isClosed()){
                 conn.close();
                 return 1;
-            }else
-                return -1;
+            }
         } catch(ClassNotFoundException e) {
             log.error(e.toString());
         } catch(SQLException e) {
@@ -61,8 +63,9 @@ public class MySQLHelper {
         try{
             Class.forName(this.driver);
             Connection conn = DriverManager.getConnection(this.url,this.user,this.password);
-            List dblist=new ArrayList();
+            
             if(!conn.isClosed()){
+                List dblist=new ArrayList();
                 Statement stmt = conn.createStatement(); //创建语句对象，用以执行sql语言
                 ResultSet rs = stmt.executeQuery("show databases"); 
                 while(rs.next()){
@@ -72,9 +75,7 @@ public class MySQLHelper {
                 stmt.close();
                 conn.close();
                 return dblist;
-            }else
-                return null;
-            
+            }
         } catch(ClassNotFoundException e) {
             log.error(e.toString());
         } catch(SQLException e) {
@@ -89,8 +90,9 @@ public class MySQLHelper {
         try{
             Class.forName(this.driver);
             Connection conn = DriverManager.getConnection(this.url,this.user,this.password);
-            List dblist=new ArrayList();
+            
             if(!conn.isClosed()){
+                List dblist=new ArrayList();
                 Statement stmt = conn.createStatement(); //创建语句对象，用以执行sql语言
                 ResultSet rs = stmt.executeQuery("show tables from "+db); 
                 while(rs.next()){
@@ -100,9 +102,7 @@ public class MySQLHelper {
                 stmt.close();
                 conn.close();
                 return dblist;
-            }else
-                return null;
-            
+            }
         } catch(ClassNotFoundException e) {
             log.error(e.toString());
         } catch(SQLException e) {
@@ -113,4 +113,38 @@ public class MySQLHelper {
         return null;
     }
     
+    
+    public List queryAll(String sql) {
+        
+        try {
+            Class.forName(this.driver);
+            Connection conn = DriverManager.getConnection(this.url,this.user,this.password);
+            if(!conn.isClosed()){
+                List<Map<String, Object>> list = new ArrayList<>();
+                Statement stmt = conn.createStatement(); //创建语句对象，用以执行sql语言
+                ResultSet rs = stmt.executeQuery(sql);
+                ResultSetMetaData md = rs.getMetaData(); //获得结果集结构信息,元数据
+                int columnCount = md.getColumnCount();   //获得列数 
+                while (rs.next()) {
+                    Map<String,Object> rowData = new HashMap<>();
+                    for (int i = 1; i <= columnCount; i++) {
+                            rowData.put(md.getColumnName(i), rs.getObject(i));
+                    }
+                    list.add(rowData);
+                }
+                rs.close();
+                stmt.close();
+                conn.close();
+                return list;
+            }
+        } catch(ClassNotFoundException e) {
+            log.error(e.toString());
+        } catch(SQLException e) {
+            log.error(e.toString());
+        }catch (Exception e) {
+            log.error(e.toString());
+        }
+        return null;
+    }
+
 }
