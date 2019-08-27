@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.xudong.easydumpserver.mysql.model;
+package com.easydumpserver.mysql.model;
 
 import java.util.ArrayList;
 import java.util.List;

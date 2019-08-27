@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.xudong.easydumpserver.mysql.helper;
+package com.easydumpserver.mysql.helper;
 
 /**
  *
@@ -115,7 +115,6 @@ public class MySQLHelper {
     
     
     public List queryAll(String sql) {
-        
         try {
             Class.forName(this.driver);
             Connection conn = DriverManager.getConnection(this.url,this.user,this.password);
@@ -129,6 +128,7 @@ public class MySQLHelper {
                     Map<String,Object> rowData = new HashMap<>();
                     for (int i = 1; i <= columnCount; i++) {
                             rowData.put(md.getColumnName(i), rs.getObject(i));
+                            System.out.println(md.getColumnName(i));
                     }
                     list.add(rowData);
                 }
@@ -146,5 +146,5 @@ public class MySQLHelper {
         }
         return null;
     }
-
+    
 }

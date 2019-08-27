@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.xudong.easydumpserver;
+package com.easydumpserver;
 
-import com.xudong.easydumpserver.mysql.helper.MySQLHelper;
+import com.easydumpserver.mysql.helper.MySQLHelper;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -31,7 +31,7 @@ public class Test {
         MySQLHelper mysqlcom=new MySQLHelper();
         mysqlcom.setURL(rb.getString("mysql.server"),rb.getString("mysql.port"),rb.getString("mysql.user"), rb.getString("mysql.password"));
         List list=mysqlcom.queryAll("select * from easydump.databases");
-        
-        
+        Map<String, Object> aa=(Map)list.get(0);
+        System.out.println(aa.get("ip"));
     }
 }

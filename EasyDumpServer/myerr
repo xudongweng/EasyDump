@@ -6,4 +6,8 @@ The last packet sent successfully to the server was 0 milliseconds ago. The driv
 com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
 
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+ 2019-08-27 11:19:17,845 method:com.xudong.easydumpserver.mysql.helper.MySQLHelper.queryAll(MySQLHelper.java:142)
+com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
  
