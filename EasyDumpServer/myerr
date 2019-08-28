@@ -1,13 +1,7 @@
-2019-08-23 21:13:01,269 method:com.xudong.easydumpserver.helper.MySQLHelper.getConnection(MySQLHelper.java:52)
-com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
- 2019-08-23 21:14:17,480 method:com.xudong.easydumpserver.helper.MySQLHelper.getConnection(MySQLHelper.java:52)
-com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
- 2019-08-27 11:19:17,845 method:com.xudong.easydumpserver.mysql.helper.MySQLHelper.queryAll(MySQLHelper.java:142)
-com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2019-08-28 20:07:14,647 method:com.easydumpserver.mysql.helper.MySQLHelper.queryAll(MySQLHelper.java:142)
+java.sql.SQLSyntaxErrorException: Table 'easydump.backuptable' doesn't exist
+ 2019-08-28 20:07:31,696 method:com.easydumpserver.mysql.helper.MySQLHelper.queryAll(MySQLHelper.java:142)
+java.sql.SQLSyntaxErrorException: Table 'easydump.backuptable' doesn't exist
+ 2019-08-28 20:07:47,834 method:com.easydumpserver.mysql.helper.MySQLHelper.queryAll(MySQLHelper.java:142)
+java.sql.SQLSyntaxErrorException: Table 'easydump.backuptable' doesn't exist
  

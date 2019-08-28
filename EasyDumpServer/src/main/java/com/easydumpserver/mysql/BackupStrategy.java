@@ -11,21 +11,22 @@ package com.easydumpserver.mysql;
  */
 public class BackupStrategy {
     private final String character=" --default-character-set=";
+    private final String mysqldump="mysqldump";
     //备份全库锁库
     public String getLockDB(String code){
-        return this.character+code+" --flush-logs -R --lock-all-tables";
+        return this.mysqldump+this.character+code+" --flush-logs -R --lock-all-tables";
     }
     //备份全库
     public String getUnlockDB(String code){
-        return this.character+code+" -R --single-transaction";
+        return this.mysqldump+this.character+code+" -R --single-transaction";
     }
     //备份结构
     public String getOnlyStruct(String code){
-        return this.character+code+" --opt";
+        return this.mysqldump+this.character+code+" --opt";
     }
     //备份数据，不包含结构
     public String getOnlyData(String code){
-        return this.character+code+" -t";
+        return this.mysqldump+this.character+code+" -t";
     }
     //分表备份
     public String getSplitTables(String code){

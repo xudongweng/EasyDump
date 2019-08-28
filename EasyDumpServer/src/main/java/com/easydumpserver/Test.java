@@ -5,7 +5,7 @@
  */
 package com.easydumpserver;
 
-import com.easydumpserver.mysql.controller.BaseInfoController;
+import com.easydumpserver.mysql.controller.MySQLDumpStringController;
 import com.easydumpserver.mysql.helper.MySQLHelper;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,7 +24,7 @@ import java.util.Set;
  */
 public class Test {
     public static void main(String[] args){
-        BaseInfoController a=new BaseInfoController();
+        MySQLDumpStringController a=new MySQLDumpStringController();
         a.getDumpBaseInfo();
         a.getDumpString();
         
