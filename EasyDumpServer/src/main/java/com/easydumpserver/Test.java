@@ -24,7 +24,9 @@ import java.util.Set;
  */
 public class Test {
     public static void main(String[] args){
+        BaseInfoController a=new BaseInfoController();
+        a.getDumpBaseInfo();
+        a.getDumpString();
         
-        BaseInfoController.getDumpBaseInfo();
     }
 }

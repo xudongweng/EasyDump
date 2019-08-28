@@ -17,7 +17,7 @@ public class BackupStrategy {
     }
     //备份全库
     public String getUnlockDB(String code){
-        return this.character+code+" --single-transaction";
+        return this.character+code+" -R --single-transaction";
     }
     //备份结构
     public String getOnlyStruct(String code){

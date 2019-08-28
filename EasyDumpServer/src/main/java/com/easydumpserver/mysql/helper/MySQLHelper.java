@@ -113,7 +113,6 @@ public class MySQLHelper {
         return null;
     }
     
-    
     public List queryAll(String sql) {
         try {
             Class.forName(this.driver);
@@ -128,7 +127,7 @@ public class MySQLHelper {
                     Map<String,Object> rowData = new HashMap<>();
                     for (int i = 1; i <= columnCount; i++) {
                             rowData.put(md.getColumnName(i), rs.getObject(i));
-                            System.out.println(md.getColumnName(i));
+                            //System.out.println(md.getColumnName(i));
                     }
                     list.add(rowData);
                 }
