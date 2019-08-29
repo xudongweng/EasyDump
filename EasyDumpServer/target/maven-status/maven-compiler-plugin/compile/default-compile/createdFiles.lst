@@ -1,7 +1,2 @@
-com\easydumpserver\mysql\helper\file\FileObjDic$1.class
-com\easydumpserver\mysql\helper\file\object\DiskObject.class
-com\easydumpserver\mysql\helper\file\object\FileObject.class
-com\easydumpserver\mysql\helper\file\FileObjDic.class
 com\easydumpserver\mysql\helper\NowString.class
-com\easydumpserver\mysql\controller\BaseInfoController.class
-com\easydumpserver\mysql\helper\file\object\FilePathObject.class
+com\easydumpserver\mysql\controller\MySQLDumpStringController.class
