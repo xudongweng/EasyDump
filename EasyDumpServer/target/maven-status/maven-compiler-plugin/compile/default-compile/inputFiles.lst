@@ -1,10 +1,5 @@
-E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\BackupStrategy.java
-E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\helper\file\object\FilePathObject.java
-E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\helper\NowString.java
-E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\model\DumpArrObject.java
-E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\Test.java
-E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\helper\file\object\FileObject.java
-E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\controller\BaseInfoController.java
-E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\helper\file\FileObjDic.java
-E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\helper\MySQLHelper.java
-E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\helper\file\object\DiskObject.java
+D:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\MySQLDumpStrategy.java
+D:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\Test.java
+D:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\helper\MySQLHelper.java
+D:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\controller\MySQLDumpStringController.java
+D:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\model\DumpArrObject.java

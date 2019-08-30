@@ -1,7 +1,9 @@
-2019-08-28 20:07:14,647 method:com.easydumpserver.mysql.helper.MySQLHelper.queryAll(MySQLHelper.java:142)
-java.sql.SQLSyntaxErrorException: Table 'easydump.backuptable' doesn't exist
- 2019-08-28 20:07:31,696 method:com.easydumpserver.mysql.helper.MySQLHelper.queryAll(MySQLHelper.java:142)
-java.sql.SQLSyntaxErrorException: Table 'easydump.backuptable' doesn't exist
- 2019-08-28 20:07:47,834 method:com.easydumpserver.mysql.helper.MySQLHelper.queryAll(MySQLHelper.java:142)
-java.sql.SQLSyntaxErrorException: Table 'easydump.backuptable' doesn't exist
+2019-08-30 15:12:58,543 method:com.easydumpserver.mysql.helper.MySQLHelper.queryAll(MySQLHelper.java:143)
+java.sql.SQLSyntaxErrorException: Table 'easydump.igonretables' doesn't exist
+ 2019-08-30 15:15:45,813 method:com.easydumpserver.mysql.helper.MySQLHelper.queryAll(MySQLHelper.java:143)
+java.sql.SQLSyntaxErrorException: Table 'easydump.igonretables' doesn't exist
+ 2019-08-30 15:16:26,248 method:com.easydumpserver.mysql.helper.MySQLHelper.queryAll(MySQLHelper.java:143)
+java.sql.SQLSyntaxErrorException: Table 'easydump.ignoretables' doesn't exist
+ 2019-08-30 15:17:17,929 method:com.easydumpserver.mysql.helper.MySQLHelper.queryAll(MySQLHelper.java:143)
+java.sql.SQLSyntaxErrorException: Table 'easydump.ignoretables' doesn't exist
  

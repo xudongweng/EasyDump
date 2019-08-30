@@ -1,2 +1,2 @@
-com\easydumpserver\mysql\helper\NowString.class
+com\easydumpserver\mysql\MySQLDumpStrategy.class
 com\easydumpserver\mysql\controller\MySQLDumpStringController.class

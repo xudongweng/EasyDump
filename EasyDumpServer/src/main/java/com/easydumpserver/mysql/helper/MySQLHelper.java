@@ -113,6 +113,7 @@ public class MySQLHelper {
         return null;
     }
     
+    //查询后获取列表
     public List queryAll(String sql) {
         try {
             Class.forName(this.driver);
@@ -146,4 +147,30 @@ public class MySQLHelper {
         return null;
     }
     
+    //对表的第一列进行MAP
+    public Map<String, String> querySingleColumnMap(String sql) {
+        try {
+            Class.forName(this.driver);
+            Connection conn = DriverManager.getConnection(this.url,this.user,this.password);
+            if(!conn.isClosed()){
+                Map<String, String> rowMap = new HashMap<>();
+                Statement stmt = conn.createStatement(); //创建语句对象，用以执行sql语言
+                ResultSet rs = stmt.executeQuery(sql);
+                while(rs.next()){
+                    rowMap.put(rs.getString(1),rs.getString(1));
+                }
+                rs.close();
+                stmt.close();
+                conn.close();
+                return rowMap;
+            }
+        } catch(ClassNotFoundException e) {
+            log.error(e.toString());
+        } catch(SQLException e) {
+            log.error(e.toString());
+        }catch (Exception e) {
+            log.error(e.toString());
+        }
+        return null;
+    }
 }
