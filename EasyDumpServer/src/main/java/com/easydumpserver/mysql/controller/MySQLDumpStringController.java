@@ -131,17 +131,24 @@ public class MySQLDumpStringController {
        //组合数据库连接基本信息字符串
        sbDump.append("-h").append(baseInfoMap.get("ip").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
                .append(" --password=").append(baseInfoMap.get("password").toString()).append(" --port=")
-               .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString());
+               .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString()).append(" ");
        //System.out.println(sbDump.toString());
-       mysqlcom.setURL(baseInfoMap.get("ip").toString(),baseInfoMap.get("port").toString(),baseInfoMap.get("user").toString(), baseInfoMap.get("password").toString());
-       List gettablelist=mysqlcom.getAllTables(baseInfoMap.get("database").toString());
-       System.out.println(sbDump.toString());
+       StringBuilder sbDumpChanger=new StringBuilder();
        if(Integer.parseInt(baseInfoMap.get("backuptable").toString())==1 && tableList.size()>0){ //分表备份仅备份指定表
-           
+            int i=tableList.size();
+            while(--i>=0){
+                sbDumpChanger.append(sbDump.toString());
+                Map<String,Object> tbMap=(Map)tableList.get(i);
+                sbDumpChanger.append(tbMap.get("tablename"));
+                System.out.println(sbDumpChanger.toString());
+                sbDumpChanger.delete(0, sbDumpChanger.length());
+            }
        }else if(Integer.parseInt(baseInfoMap.get("ignoretable").toString())==1 && tableList.size()>0){//分表备份指定表部分表不备份
-       
+            mysqlcom.setURL(baseInfoMap.get("ip").toString(),baseInfoMap.get("port").toString(),baseInfoMap.get("user").toString(), baseInfoMap.get("password").toString());
+            List gettablelist=mysqlcom.getAllTables(baseInfoMap.get("database").toString());
        }else{//分表备份所有的表
-       
+            mysqlcom.setURL(baseInfoMap.get("ip").toString(),baseInfoMap.get("port").toString(),baseInfoMap.get("user").toString(), baseInfoMap.get("password").toString());
+            List gettablelist=mysqlcom.getAllTables(baseInfoMap.get("database").toString());
        }
    }
    // </editor-fold>
