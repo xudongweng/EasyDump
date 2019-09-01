@@ -1,2 +1,3 @@
 com\easydumpserver\mysql\MySQLDumpStrategy.class
 com\easydumpserver\mysql\controller\MySQLDumpStringController.class
+com\easydumpserver\mysql\helper\compress\ZipUtilsHelper.class

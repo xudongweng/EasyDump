@@ -29,6 +29,6 @@ public class MySQLDumpStrategy {
     }
     //分表备份
     public String getSplitTables(String code){
-        return this.character+code+" --single-transaction";
+        return this.character+code+" --single-transaction ";
     }
 }
