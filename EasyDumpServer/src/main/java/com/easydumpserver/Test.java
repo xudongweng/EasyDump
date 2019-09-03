@@ -6,13 +6,16 @@
 package com.easydumpserver;
 
 import com.easydumpserver.mysql.controller.MySQLDumpStringController;
-import com.easydumpserver.mysql.helper.compress.ZipUtilsHelper;
+import com.easydumpserver.helper.compress.ZipUtilsHelper;
+import com.easydumpserver.helper.file.FileHelper;
 import com.easydumpserver.mysql.model.DumpArrObject;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
 import java.util.zip.ZipEntry;
@@ -29,16 +32,20 @@ public class Test {
         a.setDumpBaseInfo();
         a.setDumpString();
         DumpArrObject dao=a.getDumpString();
-        dao.printList();
+        //dao.printList();
         //Process process = Runtime.getRuntime().exec("");
         List dumpList=dao.getArrDump();
         List dumpPathList=dao.getDumpPath();
         int i=dumpList.size();
         ZipUtilsHelper zuh=new ZipUtilsHelper();
-        
+        SimpleDateFormat df=new SimpleDateFormat("yyyyMMddHHmmss");
+        //System.err.println(df.format(new Date()));
+        FileHelper fh=new FileHelper();
         while(--i>=0){
-            //InputStream in = Runtime.getRuntime().exec(dumpList.get(i).toString()).getInputStream();
-            //zuh.zipStreamCompress(in, destPath, filename);
+            String datetime=df.format(new Date());
+            InputStream in = Runtime.getRuntime().exec(dumpList.get(i).toString()).getInputStream();
+            fh.createPath(dumpPathList.get(i).toString());
+            zuh.zipStreamCompress(in, dumpPathList.get(i).toString(), datetime+".sql",datetime);
             System.out.println(dumpPathList.get(i));
         }
         

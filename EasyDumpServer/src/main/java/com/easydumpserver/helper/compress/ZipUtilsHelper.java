@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.easydumpserver.mysql.helper.compress;
+package com.easydumpserver.helper.compress;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,6 +20,8 @@ import org.apache.log4j.Logger;
  */
 public class ZipUtilsHelper {
     private Logger log=null;
+    private int buffsize=1024*4;
+    
     public ZipUtilsHelper(){
         this.log=Logger.getLogger(ZipUtilsHelper.class);
     }
@@ -29,7 +31,7 @@ public class ZipUtilsHelper {
              ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(destPath+zipname+".zip"));
              ZipEntry e = new ZipEntry(filename);
              zout.putNextEntry(e);
-             byte buff[] = new byte[1024];
+             byte buff[] = new byte[buffsize];
              int len = 0;  
              while ((len = in.read(buff)) != -1) {
                  zout.write(buff, 0, len);
@@ -50,7 +52,7 @@ public class ZipUtilsHelper {
     public void gzipStreamCompress(InputStream in,String destPath,String filename,String zipname){
          try{
              GZIPOutputStream gos=new GZIPOutputStream(new FileOutputStream(destPath+zipname+".gz"));
-             byte buff[] = new byte[1024];
+             byte buff[] = new byte[buffsize];
              int len = 0;  
              while ((len = in.read(buff)) != -1) {
                  //System.out.println(len);

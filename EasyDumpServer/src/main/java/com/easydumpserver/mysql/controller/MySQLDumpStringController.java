@@ -6,7 +6,7 @@
 package com.easydumpserver.mysql.controller;
 
 import com.easydumpserver.mysql.MySQLDumpStrategy;
-import com.easydumpserver.mysql.helper.MySQLHelper;
+import com.easydumpserver.helper.mysql.MySQLHelper;
 import com.easydumpserver.mysql.model.DumpArrObject;
 import java.io.File;
 import java.util.List;
@@ -112,6 +112,7 @@ public class MySQLDumpStringController {
         //System.out.println(sbDump.toString());
         this.dao.addDump(this.sbDump.toString());
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
+                .append(baseInfoMap.get("ip").toString()).append(File.separator)
                 .append(baseInfoMap.get("database").toString()).append(File.separator);
         this.dao.addDumpPath(this.sbDumpPath.toString());
         this.sbDump.delete(0, this.sbDump.length());
@@ -129,6 +130,7 @@ public class MySQLDumpStringController {
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
         this.dao.addDump(this.sbDump.toString());
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
+                .append(baseInfoMap.get("ip").toString()).append(File.separator)
                 .append(baseInfoMap.get("database").toString()).append(File.separator);
         this.dao.addDumpPath(this.sbDumpPath.toString());
         
@@ -147,6 +149,7 @@ public class MySQLDumpStringController {
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
         this.dao.addDump(this.sbDump.toString());
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
+                .append(baseInfoMap.get("ip").toString()).append(File.separator)
                 .append(baseInfoMap.get("database").toString()).append(File.separator);
         this.dao.addDumpPath(this.sbDumpPath.toString());
         
@@ -164,6 +167,7 @@ public class MySQLDumpStringController {
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
         this.dao.addDump(this.sbDump.toString());
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
+                .append(baseInfoMap.get("ip").toString()).append(File.separator)
                 .append(baseInfoMap.get("database").toString()).append(File.separator);
         this.dao.addDumpPath(this.sbDumpPath.toString());
         
@@ -190,8 +194,9 @@ public class MySQLDumpStringController {
                 //System.out.println(sbDumpChanger.toString());
                 this.dao.addDump(sbDumpChanger.toString());
                 this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                    .append(baseInfoMap.get("database").toString()).append(File.separator)
-                    .append(tbMap.get("tablename")).append(File.separator);
+                        .append(baseInfoMap.get("ip").toString()).append(File.separator)
+                        .append(baseInfoMap.get("database").toString()).append(File.separator)
+                        .append(tbMap.get("tablename")).append(File.separator);
                 this.dao.addDumpPath(this.sbDumpPath.toString());
                 
                 this.sbDumpPath.delete(0, this.sbDumpPath.length());
@@ -219,8 +224,9 @@ public class MySQLDumpStringController {
                     //System.out.println(sbDumpChanger.toString());
                     this.dao.addDump(sbDumpChanger.toString());
                     this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                        .append(baseInfoMap.get("database").toString()).append(File.separator)
-                        .append(gettablelist.get(j)).append(File.separator);
+                            .append(baseInfoMap.get("ip").toString()).append(File.separator)
+                            .append(baseInfoMap.get("database").toString()).append(File.separator)
+                            .append(gettablelist.get(j)).append(File.separator);
                     this.dao.addDumpPath(this.sbDumpPath.toString());
                 
                     this.sbDumpPath.delete(0, this.sbDumpPath.length());
@@ -239,6 +245,7 @@ public class MySQLDumpStringController {
                 //System.out.println(sbDumpChanger.toString());
                 this.dao.addDump(sbDumpChanger.toString());
                 this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
+                    .append(baseInfoMap.get("ip").toString()).append(File.separator)
                     .append(baseInfoMap.get("database").toString()).append(File.separator)
                     .append(gettablelist.get(j)).append(File.separator);
                 this.dao.addDumpPath(this.sbDumpPath.toString());
