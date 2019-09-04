@@ -29,7 +29,7 @@ public class MySQLHelper {
     private String url;
     private String user;
     private String password;
-    private Logger log;
+    private Logger log=null;
     
     public MySQLHelper(){
         this.log=Logger.getLogger(MySQLHelper.class);

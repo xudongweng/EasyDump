@@ -28,10 +28,10 @@ import java.util.zip.ZipOutputStream;
 public class Test {
     public static void main(String[] args) throws IOException{
         
-        MySQLDumpStringController a=new MySQLDumpStringController();
-        a.setDumpBaseInfo();
-        a.setDumpString();
-        DumpArrObject dao=a.getDumpString();
+        MySQLDumpStringController dumpctl=new MySQLDumpStringController();
+        dumpctl.setDumpBaseInfo();
+        dumpctl.setDumpString();
+        DumpArrObject dao=dumpctl.getDumpString();
         //dao.printList();
         //Process process = Runtime.getRuntime().exec("");
         List dumpList=dao.getArrDump();
