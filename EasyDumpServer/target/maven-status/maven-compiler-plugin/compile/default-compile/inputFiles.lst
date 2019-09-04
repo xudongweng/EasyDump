@@ -1,7 +1,9 @@
 E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\helper\file\FileHelper.java
 E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\controller\MySQLDumpStringController.java
 E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\model\DumpArrObject.java
-E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\Test.java
+E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\controller\MySQLBackupController.java
+E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\controller\thread\BackupThread.java
 E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\helper\compress\ZipUtilsHelper.java
+E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\EasyDumpTool.java
 E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\helper\mysql\MySQLHelper.java
 E:\GitHub\EasyDump\EasyDumpServer\src\main\java\com\easydumpserver\mysql\MySQLDumpStrategy.java

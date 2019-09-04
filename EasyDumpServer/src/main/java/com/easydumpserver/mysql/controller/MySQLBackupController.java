@@ -7,6 +7,7 @@ package com.easydumpserver.mysql.controller;
 
 import com.easydumpserver.helper.compress.ZipUtilsHelper;
 import com.easydumpserver.helper.file.FileHelper;
+import com.easydumpserver.helper.mysql.MySQLHelper;
 import com.easydumpserver.mysql.controller.thread.BackupThread;
 import com.easydumpserver.mysql.model.DumpArrObject;
 import java.io.IOException;
@@ -29,10 +30,16 @@ public class MySQLBackupController {
     private Logger log=null;
     private Locale myLocale = null;
     private ResourceBundle rb = null;
+    private int threads=1;
     public MySQLBackupController(){
         this.log=Logger.getLogger(MySQLBackupController.class);
         myLocale = Locale.getDefault(Locale.Category.FORMAT);
         this.rb= ResourceBundle.getBundle("config",myLocale);
+        this.threads=Integer.parseInt(rb.getString("threads"));
+    }
+    
+    public int getThreadNum(){
+        return this.threads;
     }
     
     public void singleTreadBackup(DumpArrObject dao){
@@ -56,17 +63,20 @@ public class MySQLBackupController {
     }
     
     public void multipleTreadBackup(DumpArrObject dao){
-        int threads=Integer.parseInt(rb.getString("threads"));
         ExecutorService poolbk = Executors.newFixedThreadPool(threads);
         List dumpList=dao.getArrDump();
         List dumpPathList=dao.getDumpPath();
         int i=dumpList.size();
-         while(--i>=0){
-             BackupThread bt=new BackupThread(dumpList.get(i).toString(),dumpPathList.get(i).toString());
-             poolbk.execute(bt);
-         }
-          poolbk.shutdown();
-          try{
+        ZipUtilsHelper zuh=new ZipUtilsHelper();
+        SimpleDateFormat df=new SimpleDateFormat("yyyyMMddHHmmss");
+        FileHelper fh=new FileHelper();
+        while(--i>=0){
+            fh.createPath(dumpPathList.get(i).toString());
+            BackupThread bt=new BackupThread(dumpList.get(i).toString(),dumpPathList.get(i).toString(),df.format(new Date()),zuh,this.log);
+            poolbk.execute(bt);
+        }
+        poolbk.shutdown();
+        try{
             poolbk.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);//等待线程池结束，注销将不等待
         }catch(InterruptedException e){
             log.error(e.toString());

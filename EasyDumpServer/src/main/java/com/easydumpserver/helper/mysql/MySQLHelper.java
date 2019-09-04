@@ -41,13 +41,13 @@ public class MySQLHelper {
         this.password=password;
     }
     
-    public byte getConnection(){
+    public boolean getConnection(){
         try{
             Class.forName(this.driver);
             Connection conn = DriverManager.getConnection(this.url,this.user,this.password);
             if(!conn.isClosed()){
                 conn.close();
-                return 1;
+                return true;
             }
         } catch(ClassNotFoundException e) {
             log.error(e.toString());
@@ -56,7 +56,7 @@ public class MySQLHelper {
         }catch (Exception e) {
             log.error(e.toString());
         }
-        return -1;
+        return false;
     }
     
     public List getAllDB(){

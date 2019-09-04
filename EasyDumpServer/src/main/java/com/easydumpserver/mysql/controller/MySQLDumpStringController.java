@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -21,15 +22,15 @@ import java.util.ResourceBundle;
 public class MySQLDumpStringController {
     private Locale myLocale = null;
     private ResourceBundle rb = null;
-    MySQLHelper mysqlcom=null;
-    List baseList=null;
-    MySQLDumpStrategy bkStrategy=null;
+    private MySQLHelper mysqlcom=null;
+    private List baseList=null;
+    private MySQLDumpStrategy bkStrategy=null;
     
-    StringBuilder sbDump=null;//组合备份策略字符串使用
-    StringBuilder sbDumpPath=null;//组合备份路径使用
+    private StringBuilder sbDump=null;//组合备份策略字符串使用
+    private StringBuilder sbDumpPath=null;//组合备份路径使用
     
-    DumpArrObject dao=null;
-    
+    private DumpArrObject dao=null;
+    private Logger log=null;
     
     
     public MySQLDumpStringController(){
@@ -40,6 +41,7 @@ public class MySQLDumpStringController {
         dao=new DumpArrObject();
         sbDump=new StringBuilder();
         sbDumpPath=new StringBuilder();
+        this.log=Logger.getLogger(MySQLDumpStringController.class);
     }
     
     // <editor-fold defaultstate="collapsed" desc="组合字符串第1步">
@@ -69,23 +71,31 @@ public class MySQLDumpStringController {
             }else if(Integer.parseInt(baseInfoMap.get("ignoretable").toString())==1){
                 tableList=mysqlcom.queryAll("select * from easydump.ignoretables where databaseid="+baseInfoMap.get("id").toString());
             }
-            int j=Integer.parseInt(baseInfoMap.get("strategy").toString());
-            switch(j){
-                case 0:
-                    setLockDBDump(baseInfoMap,tableList);
-                    break;
-                case 1:
-                    setUnlockDBDump(baseInfoMap,tableList);
-                    break;
-                case 2:
-                    setOnlyStructDump(baseInfoMap,tableList);
-                    break;
-                case 3:
-                    setOnlyDataDump(baseInfoMap,tableList);
-                    break;
-                case 4:
-                    setSplitTablesDump(baseInfoMap,tableList);
-                    break;
+            //检查备份库是否连通
+            mysqlcom.setURL(baseInfoMap.get("ip").toString(),baseInfoMap.get("port").toString(),
+                    baseInfoMap.get("user").toString(), baseInfoMap.get("password").toString());
+            boolean conn=mysqlcom.getConnection();
+            if(conn){
+                int j=Integer.parseInt(baseInfoMap.get("strategy").toString());
+                switch(j){
+                    case 0:
+                        setLockDBDump(baseInfoMap,tableList);
+                        break;
+                    case 1:
+                        setUnlockDBDump(baseInfoMap,tableList);
+                        break;
+                    case 2:
+                        setOnlyStructDump(baseInfoMap,tableList);
+                        break;
+                    case 3:
+                        setOnlyDataDump(baseInfoMap,tableList);
+                        break;
+                    case 4:
+                        setSplitTablesDump(baseInfoMap,tableList);
+                        break;
+                }
+            }else{
+                log.warn(baseInfoMap.get("ip").toString()+" server can not connect.");
             }
         }
         if(tableList!=null)
