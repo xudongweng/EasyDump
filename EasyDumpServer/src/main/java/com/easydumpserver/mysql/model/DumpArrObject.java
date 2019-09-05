@@ -15,11 +15,20 @@ import java.util.List;
 public class DumpArrObject {
     private List<String> arrDump=new ArrayList<>();//mysqldump字符串集合
     private List<String> arrDumpPath=new ArrayList<>();//mysqldump路径字符串集合
+    private List<Integer> arrDumpObj=new ArrayList<>();//备份天数
+    
     public void addDump(String dump){
         this.arrDump.add(dump);
     }
-    public List<String> getArrDump(){
+    public List<String> getDump(){
         return this.arrDump;
+    }
+    public void addDumpObj(int day){
+        this.arrDumpObj.add(day);
+    }
+    
+    public List<Integer> getDumpObj(){
+        return this.arrDumpObj;
     }
     
     public void addDumpPath(String dump){
@@ -49,5 +58,6 @@ public class DumpArrObject {
     public void clear(){
         this.arrDump.clear();
         this.arrDumpPath.clear();
+        this.arrDumpObj.clear();
     }
 }

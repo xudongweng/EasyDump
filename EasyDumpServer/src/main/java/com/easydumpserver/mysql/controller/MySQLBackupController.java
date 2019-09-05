@@ -7,7 +7,6 @@ package com.easydumpserver.mysql.controller;
 
 import com.easydumpserver.helper.compress.ZipUtilsHelper;
 import com.easydumpserver.helper.file.FileHelper;
-import com.easydumpserver.helper.mysql.MySQLHelper;
 import com.easydumpserver.mysql.controller.thread.BackupThread;
 import com.easydumpserver.mysql.model.DumpArrObject;
 import java.io.IOException;
@@ -43,7 +42,7 @@ public class MySQLBackupController {
     }
     
     public void singleTreadBackup(DumpArrObject dao){
-        List dumpList=dao.getArrDump();
+        List dumpList=dao.getDump();
         List dumpPathList=dao.getDumpPath();
         int i=dumpList.size();
         ZipUtilsHelper zuh=new ZipUtilsHelper();
@@ -52,9 +51,11 @@ public class MySQLBackupController {
         while(--i>=0){
             try{
                 String datetime=df.format(new Date());
+                log.info(" Start--"+dumpList.get(i).toString());
                 InputStream in = Runtime.getRuntime().exec(dumpList.get(i).toString()).getInputStream();
                 fh.createPath(dumpPathList.get(i).toString());
                 zuh.zipStreamCompress(in, dumpPathList.get(i).toString(), datetime+".sql",datetime);
+                log.info(" Finished--"+dumpList.get(i).toString());
                 //System.out.println(dumpPathList.get(i));
             }catch(IOException e){
                 log.error(e.toString());
@@ -64,7 +65,7 @@ public class MySQLBackupController {
     
     public void multipleTreadBackup(DumpArrObject dao){
         ExecutorService poolbk = Executors.newFixedThreadPool(threads);
-        List dumpList=dao.getArrDump();
+        List dumpList=dao.getDump();
         List dumpPathList=dao.getDumpPath();
         int i=dumpList.size();
         ZipUtilsHelper zuh=new ZipUtilsHelper();

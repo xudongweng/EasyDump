@@ -30,8 +30,10 @@ public class BackupThread extends Thread{
     @Override
     public void run() {
         try{
+            log.info(" Start--"+this.dummp);
             InputStream in = Runtime.getRuntime().exec(this.dummp).getInputStream();
             zuh.zipStreamCompress(in, this.dumpPath, datetime+".sql",datetime);
+            log.info(" Finished--"+this.dummp);
         }catch(IOException e){
             log.error(e.toString());
         }

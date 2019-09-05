@@ -77,4 +77,34 @@ public class FileHelper {
             file.mkdirs();
         }
     }
+    //获取最早文件路径
+    public String getOlderFile(String directory){
+        File file=new File(directory);
+        File[] tempList=file.listFiles();
+        if(tempList==null)
+            return "";
+        long filedate=0;
+        String filepath="";
+        if(tempList.length>0){
+            for (File tempfile : tempList) {
+                if(filedate==0){
+                    filepath=tempfile.toString();
+                    filedate=tempfile.lastModified();
+                }else if(filedate>tempfile.lastModified()){
+                    filepath=tempfile.toString();
+                    filedate=tempfile.lastModified();
+                }
+            }
+            return filepath;
+        }else{
+            return filepath;
+        }
+    }
+    
+    //获取路径下文件数量
+    public int getFileNum(String directory){
+        File file=new File(directory);
+        File[] tempList=file.listFiles();
+        return tempList.length;
+    }
 }
