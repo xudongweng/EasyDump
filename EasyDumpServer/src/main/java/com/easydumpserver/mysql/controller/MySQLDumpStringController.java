@@ -28,7 +28,8 @@ public class MySQLDumpStringController {
     
     private StringBuilder sbDump=null;//组合备份策略字符串使用
     private StringBuilder sbDumpPath=null;//组合备份路径使用
-    private StringBuilder sbInfo=null;//日志、备份天数
+    private StringBuilder sbInfo=null;//日志信息
+    
     
     private DumpArrObject dao=null;
     private Logger log=null;
@@ -121,14 +122,17 @@ public class MySQLDumpStringController {
                .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString());
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
         //System.out.println(sbDump.toString());
-        this.dao.addDump(this.sbDump.toString());
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
                 .append(baseInfoMap.get("ip").toString()).append(File.separator)
                 .append(baseInfoMap.get("database").toString()).append(File.separator);
         this.sbInfo.append(" [ip]:").append(baseInfoMap.get("ip").toString()).append(",")
                 .append("[db]:").append(baseInfoMap.get("database").toString());
-                
+        
+        this.dao.addDump(this.sbDump.toString());        
         this.dao.addDumpPath(this.sbDumpPath.toString());
+        this.dao.addLogInfo(this.sbInfo.toString());
+        this.dao.addFileNum(Integer.parseInt(baseInfoMap.get("filenum").toString()));
+
         this.sbDump.delete(0, this.sbDump.length());
         this.sbDumpPath.delete(0, this.sbDumpPath.length());
         this.sbInfo.delete(0,this.sbInfo.length());
@@ -143,14 +147,16 @@ public class MySQLDumpStringController {
                .append(" --password=\"").append(baseInfoMap.get("password").toString()).append("\" --port=")
                .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString());
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
-        this.dao.addDump(this.sbDump.toString());
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
                 .append(baseInfoMap.get("ip").toString()).append(File.separator)
                 .append(baseInfoMap.get("database").toString()).append(File.separator);
         this.sbInfo.append(" [ip]").append(baseInfoMap.get("ip").toString()).append(",")
                 .append("[db]").append(baseInfoMap.get("database").toString());
         
+        this.dao.addDump(this.sbDump.toString());        
         this.dao.addDumpPath(this.sbDumpPath.toString());
+        this.dao.addLogInfo(this.sbInfo.toString());
+        this.dao.addFileNum(Integer.parseInt(baseInfoMap.get("filenum").toString()));
         
         this.sbDump.delete(0, this.sbDump.length());
         this.sbDumpPath.delete(0, this.sbDumpPath.length());
@@ -166,14 +172,16 @@ public class MySQLDumpStringController {
                .append(" --password=\"").append(baseInfoMap.get("password").toString()).append("\" --port=")
                .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString());
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
-        this.dao.addDump(this.sbDump.toString());
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
                 .append(baseInfoMap.get("ip").toString()).append(File.separator)
                 .append(baseInfoMap.get("database").toString()).append(File.separator);
         this.sbInfo.append(" [ip]:").append(baseInfoMap.get("ip").toString()).append(",")
                 .append("[db]:").append(baseInfoMap.get("database").toString());
         
+        this.dao.addDump(this.sbDump.toString());        
         this.dao.addDumpPath(this.sbDumpPath.toString());
+        this.dao.addLogInfo(this.sbInfo.toString());
+        this.dao.addFileNum(Integer.parseInt(baseInfoMap.get("filenum").toString()));
         
         this.sbDump.delete(0, this.sbDump.length());
         this.sbDumpPath.delete(0, this.sbDumpPath.length());
@@ -189,14 +197,16 @@ public class MySQLDumpStringController {
                .append(" --password=\"").append(baseInfoMap.get("password").toString()).append("\" --port=")
                .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString());
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
-        this.dao.addDump(this.sbDump.toString());
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
                 .append(baseInfoMap.get("ip").toString()).append(File.separator)
                 .append(baseInfoMap.get("database").toString()).append(File.separator);
         this.sbInfo.append(" [ip]:").append(baseInfoMap.get("ip").toString()).append(",")
                 .append("[db]:").append(baseInfoMap.get("database").toString());
         
+        this.dao.addDump(this.sbDump.toString());        
         this.dao.addDumpPath(this.sbDumpPath.toString());
+        this.dao.addLogInfo(this.sbInfo.toString());
+        this.dao.addFileNum(Integer.parseInt(baseInfoMap.get("filenum").toString()));
         
         this.sbDump.delete(0, this.sbDump.length());
         this.sbDumpPath.delete(0, this.sbDumpPath.length());
@@ -220,7 +230,6 @@ public class MySQLDumpStringController {
                 Map<String,Object> tbMap=(Map)tableList.get(i);
                 sbDumpChanger.append(tbMap.get("tablename"));
                 //System.out.println(sbDumpChanger.toString());
-                this.dao.addDump(sbDumpChanger.toString());
                 this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
                         .append(baseInfoMap.get("ip").toString()).append(File.separator)
                         .append(baseInfoMap.get("database").toString()).append(File.separator)
@@ -229,7 +238,10 @@ public class MySQLDumpStringController {
                      .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
                      .append("[table]:").append(tbMap.get("tablename"));
                 
+                this.dao.addDump(sbDumpChanger.toString());        
                 this.dao.addDumpPath(this.sbDumpPath.toString());
+                this.dao.addLogInfo(this.sbInfo.toString());
+                this.dao.addFileNum(Integer.parseInt(baseInfoMap.get("filenum").toString()));
                 
                 this.sbDumpPath.delete(0, this.sbDumpPath.length());
                 sbDumpChanger.delete(0, sbDumpChanger.length());
@@ -255,17 +267,19 @@ public class MySQLDumpStringController {
                 if(check){//备份表与不需要备份表不相同，则备份
                     sbDumpChanger.append("\"").append(gettablelist.get(j)).append("\"");
                     //System.out.println(sbDumpChanger.toString());
-                    this.dao.addDump(sbDumpChanger.toString());
                     this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
                             .append(baseInfoMap.get("ip").toString()).append(File.separator)
                             .append(baseInfoMap.get("database").toString()).append(File.separator)
                             .append(gettablelist.get(j)).append(File.separator);
                     this.sbInfo.append(" [ip]:").append(baseInfoMap.get("ip").toString()).append(",")
-                     .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
-                     .append("[table]:").append(sbDumpChanger.toString());
+                            .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
+                            .append("[table]:").append(sbDumpChanger.toString());
                     
+                    this.dao.addDump(sbDumpChanger.toString());        
                     this.dao.addDumpPath(this.sbDumpPath.toString());
-                
+                    this.dao.addLogInfo(this.sbInfo.toString());
+                    this.dao.addFileNum(Integer.parseInt(baseInfoMap.get("filenum").toString()));
+                    
                     this.sbDumpPath.delete(0, this.sbDumpPath.length());
                     sbDumpChanger.delete(0, sbDumpChanger.length());
                     this.sbInfo.delete(0,this.sbInfo.length());
@@ -281,15 +295,18 @@ public class MySQLDumpStringController {
                 sbDumpChanger.append(this.sbDump.toString());
                 sbDumpChanger.append("\"").append(gettablelist.get(j)).append("\"");
                 //System.out.println(sbDumpChanger.toString());
-                this.dao.addDump(sbDumpChanger.toString());
                 this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
                     .append(baseInfoMap.get("ip").toString()).append(File.separator)
                     .append(baseInfoMap.get("database").toString()).append(File.separator)
                     .append(gettablelist.get(j)).append(File.separator);
                 this.sbInfo.append(" [ip]:").append(baseInfoMap.get("ip").toString()).append(",")
-                     .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
-                     .append("[table]:").append(gettablelist.get(j));
+                    .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
+                    .append("[table]:").append(gettablelist.get(j));
+                
+                this.dao.addDump(sbDumpChanger.toString());        
                 this.dao.addDumpPath(this.sbDumpPath.toString());
+                this.dao.addLogInfo(this.sbInfo.toString());
+                this.dao.addFileNum(Integer.parseInt(baseInfoMap.get("filenum").toString()));
                 
                 this.sbDumpPath.delete(0, this.sbDumpPath.length());
                 sbDumpChanger.delete(0, sbDumpChanger.length());

@@ -15,7 +15,8 @@ import java.util.List;
 public class DumpArrObject {
     private List<String> arrDump=new ArrayList<>();//mysqldump字符串集合
     private List<String> arrDumpPath=new ArrayList<>();//mysqldump路径字符串集合
-    private List<Integer> arrDumpObj=new ArrayList<>();//备份天数
+    private List<String> arrLogInfo=new ArrayList<>();//日志备份信息
+    private List<Integer> arrFileNum=new ArrayList<>();//备份文件数量
     
     public void addDump(String dump){
         this.arrDump.add(dump);
@@ -23,12 +24,18 @@ public class DumpArrObject {
     public List<String> getDump(){
         return this.arrDump;
     }
-    public void addDumpObj(int day){
-        this.arrDumpObj.add(day);
+    public void addFileNum(int FileNum){
+        this.arrFileNum.add(FileNum);
     }
     
-    public List<Integer> getDumpObj(){
-        return this.arrDumpObj;
+    public List<Integer> getFileNum(){
+        return this.arrFileNum;
+    }
+    public void addLogInfo(String info){
+        this.arrLogInfo.add(info);
+    }
+    public List<String> getLogInfo(){
+        return this.arrLogInfo;
     }
     
     public void addDumpPath(String dump){
@@ -58,6 +65,7 @@ public class DumpArrObject {
     public void clear(){
         this.arrDump.clear();
         this.arrDumpPath.clear();
-        this.arrDumpObj.clear();
+        this.arrLogInfo.clear();
+        this.arrFileNum.clear();
     }
 }

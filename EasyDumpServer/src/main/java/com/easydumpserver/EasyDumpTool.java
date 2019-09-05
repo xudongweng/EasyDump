@@ -27,5 +27,6 @@ public class EasyDumpTool {
         }else{
             bkctl.multipleTreadBackup(dao);
         }
+        dao.clear();
     }
 }

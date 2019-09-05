@@ -6,6 +6,7 @@
 package com.easydumpserver.mysql.controller.thread;
 
 import com.easydumpserver.helper.compress.ZipUtilsHelper;
+import com.easydumpserver.helper.file.FileHelper;
 import java.io.IOException;
 import java.io.InputStream;
 import org.apache.log4j.Logger;
@@ -20,20 +21,23 @@ public class BackupThread extends Thread{
     private String datetime="";
     private ZipUtilsHelper zuh=null;
     private Logger log=null;
-    public BackupThread(String dump,String dumpPath,String datetime,ZipUtilsHelper zuh,Logger log){
+    private String logInfo="";
+
+    public BackupThread(String dump,String dumpPath,String datetime,ZipUtilsHelper zuh,Logger log,String logInfo){
         this.dummp=dump;
         this.dumpPath=dumpPath;
         this.datetime=datetime;
         this.zuh=zuh;
         this.log=log;
+        this.logInfo=logInfo;
     }
     @Override
     public void run() {
         try{
-            log.info(" Start--"+this.dummp);
+            log.info(" Backup start --"+this.logInfo);
             InputStream in = Runtime.getRuntime().exec(this.dummp).getInputStream();
             zuh.zipStreamCompress(in, this.dumpPath, datetime+".sql",datetime);
-            log.info(" Finished--"+this.dummp);
+            log.info(" Backup finished --"+this.logInfo);
         }catch(IOException e){
             log.error(e.toString());
         }
