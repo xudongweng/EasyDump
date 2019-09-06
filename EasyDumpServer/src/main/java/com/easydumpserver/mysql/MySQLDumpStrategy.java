@@ -31,4 +31,8 @@ public class MySQLDumpStrategy {
     public String getSplitTables(String code){
         return this.character+code+" --single-transaction ";
     }
+    //备份存储过程
+    public String getProduce(String code){
+        return this.character+code+" -n -d -t -R ";
+    }
 }

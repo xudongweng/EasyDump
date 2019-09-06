@@ -223,6 +223,24 @@ public class MySQLDumpStringController {
                 .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString()).append(" ");
         //System.out.println(sbDump.toString());
         StringBuilder sbDumpChanger=new StringBuilder();
+        // <editor-fold defaultstate="collapsed" desc="单独备份存储过程">
+        sbDumpChanger.append(this.sbDump.toString()).append(this.bkStrategy.getProduce(baseInfoMap.get("code").toString()));
+        this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
+                        .append(baseInfoMap.get("ip").toString()).append(File.separator)
+                        .append(baseInfoMap.get("database").toString()).append(File.separator)
+                        .append("produce").append(File.separator);
+        this.sbInfo.append(" [ip]:").append(baseInfoMap.get("ip").toString()).append(",")
+                     .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
+                     .append("[produce]:").append("produce");
+        this.dao.addDump(sbDumpChanger.toString());        
+        this.dao.addDumpPath(this.sbDumpPath.toString());
+        this.dao.addLogInfo(this.sbInfo.toString());
+        this.dao.addFileNum(Integer.parseInt(baseInfoMap.get("filenum").toString()));
+        
+        this.sbDumpPath.delete(0, this.sbDumpPath.length());
+        sbDumpChanger.delete(0, sbDumpChanger.length());
+        this.sbInfo.delete(0,this.sbInfo.length());
+        // </editor-fold>
         if(Integer.parseInt(baseInfoMap.get("backuptable").toString())==1 && tableList.size()>0){ //分表备份仅备份指定表
             int i=tableList.size();
             while(--i>=0){
