@@ -6,7 +6,6 @@
 package com.easydumpserver.mysql.controller.thread;
 
 import com.easydumpserver.helper.compress.ZipUtilsHelper;
-import com.easydumpserver.helper.file.FileHelper;
 import java.io.IOException;
 import java.io.InputStream;
 import org.apache.log4j.Logger;
