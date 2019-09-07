@@ -1,0 +1,4 @@
+jdk12
+需要运行SQL:easydump.sql
+初始配置文件:config.properties
+运行命令:java -cp EasyDumpServer-1.0-SNAPSHOT-jar-with-dependencies.jar com.easydumpserver.EasyDumpTool

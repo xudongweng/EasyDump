@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class EasyDumpTool {
     public static void main(String[] args) throws IOException{
-        
+        //System.out.println(EasyDumpTool.class.getResource("/"));
         MySQLDumpStringController dumpctl=new MySQLDumpStringController();
         dumpctl.setDumpBaseInfo();
         dumpctl.setDumpString();
