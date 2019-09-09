@@ -52,7 +52,7 @@ public class MySQLDumpStringController {
     public void setDumpBaseInfo(){
         //System.out.println(rb.getString("mysql.server"));
         mysqlcom.setURL(rb.getString("mysql.server"),rb.getString("mysql.port"),rb.getString("mysql.user"), rb.getString("mysql.password"));
-        baseList=mysqlcom.queryAll("select * from easydump.dbs where enable=1");
+        baseList=mysqlcom.queryAll("select * from "+rb.getString("mysql.database")+".dbs where enable=1");
         //Map<String, Object> aa=(Map)baseList.get(0);
         //System.out.println(aa.get("ip"));
     }
@@ -70,9 +70,9 @@ public class MySQLDumpStringController {
             //String aa=baseInfoMap.get("backuptable").toString();
             //System.out.println(aa);
             if(Integer.parseInt(baseInfoMap.get("backuptable").toString())==1){
-                tableList=mysqlcom.queryAll("select * from easydump.backuptables where dbid="+baseInfoMap.get("id").toString());
+                tableList=mysqlcom.queryAll("select * from "+rb.getString("mysql.database")+".backuptables where dbid="+baseInfoMap.get("id").toString());
             }else if(Integer.parseInt(baseInfoMap.get("ignoretable").toString())==1){
-                tableList=mysqlcom.queryAll("select * from easydump.ignoretables where dbid="+baseInfoMap.get("id").toString());
+                tableList=mysqlcom.queryAll("select * from "+rb.getString("mysql.database")+".ignoretables where dbid="+baseInfoMap.get("id").toString());
             }
             //检查备份库是否连通
             mysqlcom.setURL(baseInfoMap.get("host").toString(),baseInfoMap.get("port").toString(),
@@ -267,6 +267,7 @@ public class MySQLDumpStringController {
             }
 
         }else if(Integer.parseInt(baseInfoMap.get("ignoretable").toString())==1 && tableList.size()>0){//分表备份指定表部分表不备份
+            /*
             mysqlcom.setURL(baseInfoMap.get("host").toString(),baseInfoMap.get("port").toString(),baseInfoMap.get("user").toString(), baseInfoMap.get("password").toString());
             List gettablelist=mysqlcom.getAllTables(baseInfoMap.get("database").toString());
             int i=tableList.size();
@@ -305,6 +306,36 @@ public class MySQLDumpStringController {
 
             }
             gettablelist.clear();
+            */
+            mysqlcom.setURL(baseInfoMap.get("host").toString(),baseInfoMap.get("port").toString(),baseInfoMap.get("user").toString(), baseInfoMap.get("password").toString());
+            List gettablelist=mysqlcom.getAllTables(baseInfoMap.get("database").toString());
+            mysqlcom.setURL(rb.getString("mysql.server"),rb.getString("mysql.port"),rb.getString("mysql.user"), rb.getString("mysql.password"));
+            int j=gettablelist.size();
+            while(--j>=0){
+                sbDumpChanger.append(this.sbDump.toString());
+                int row=mysqlcom.querySize("SELECT * FROM "+rb.getString("mysql.database")+".ignoretables WHERE dbid="+baseInfoMap.get("id").toString()+" AND tablename='"
+                +gettablelist.get(j)+"'");
+                if(row==0){
+                    sbDumpChanger.append("\"").append(gettablelist.get(j)).append("\"");
+                    //System.out.println(sbDumpChanger.toString());
+                    this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
+                            .append(baseInfoMap.get("host").toString()).append(File.separator)
+                            .append(baseInfoMap.get("database").toString()).append(File.separator)
+                            .append(gettablelist.get(j)).append(File.separator);
+                    this.sbInfo.append(" [host]:").append(baseInfoMap.get("host").toString()).append(",")
+                            .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
+                            .append("[table]:").append(gettablelist.get(j));
+                    
+                    this.dao.addDump(sbDumpChanger.toString());        
+                    this.dao.addDumpPath(this.sbDumpPath.toString());
+                    this.dao.addLogInfo(this.sbInfo.toString());
+                    this.dao.addFileNum(Integer.parseInt(baseInfoMap.get("filenum").toString()));
+                    
+                    this.sbDumpPath.delete(0, this.sbDumpPath.length());
+                    sbDumpChanger.delete(0, sbDumpChanger.length());
+                    this.sbInfo.delete(0,this.sbInfo.length());
+                }
+            }
         }else{//分表备份所有的表
             mysqlcom.setURL(baseInfoMap.get("host").toString(),baseInfoMap.get("port").toString(),baseInfoMap.get("user").toString(), baseInfoMap.get("password").toString());
             List gettablelist=mysqlcom.getAllTables(baseInfoMap.get("database").toString());

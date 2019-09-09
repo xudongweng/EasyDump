@@ -173,4 +173,30 @@ public class MySQLHelper {
         }
         return null;
     }
+    
+    //查询行数
+    public int querySize(String sql){
+        int row=0;
+        try {
+            Class.forName(this.driver);
+            Connection conn = DriverManager.getConnection(this.url,this.user,this.password);
+            if(!conn.isClosed()){
+                Statement stmt = conn.createStatement(); //创建语句对象，用以执行sql语言
+                ResultSet rs = stmt.executeQuery(sql);
+                rs.last();
+                row=rs.getRow();
+                rs.close();
+                stmt.close();
+                conn.close();
+                return row;
+            }
+        } catch(ClassNotFoundException e) {
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password+",[sql]:"+sql);
+        } catch(SQLException e) {
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password+",[sql]:"+sql);
+        }catch (Exception e) {
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password+",[sql]:"+sql);
+        }
+        return row;
+    }
 }
