@@ -50,11 +50,11 @@ public class MySQLHelper {
                 return true;
             }
         } catch(ClassNotFoundException e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password);
         } catch(SQLException e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password);
         }catch (Exception e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password);
         }
         return false;
     }
@@ -77,11 +77,11 @@ public class MySQLHelper {
                 return dblist;
             }
         } catch(ClassNotFoundException e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password);
         } catch(SQLException e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password);
         }catch (Exception e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password);
         }
         return null;
     }
@@ -104,11 +104,11 @@ public class MySQLHelper {
                 return dblist;
             }
         } catch(ClassNotFoundException e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password+",[db]:"+db);
         } catch(SQLException e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password+",[db]:"+db);
         }catch (Exception e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password+",[db]:"+db);
         }
         return null;
     }
@@ -138,11 +138,11 @@ public class MySQLHelper {
                 return list;
             }
         } catch(ClassNotFoundException e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password+",[sql]:"+sql);
         } catch(SQLException e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password+",[sql]:"+sql);
         }catch (Exception e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password+",[sql]:"+sql);
         }
         return null;
     }
@@ -165,11 +165,11 @@ public class MySQLHelper {
                 return rowMap;
             }
         } catch(ClassNotFoundException e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password+",[sql]:"+sql);
         } catch(SQLException e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password+",[sql]:"+sql);
         }catch (Exception e) {
-            log.error(e.toString());
+            log.error(e.toString()+" [url:]"+this.url+",[user]:"+this.user+",[password]:"+this.password+",[sql]:"+sql);
         }
         return null;
     }

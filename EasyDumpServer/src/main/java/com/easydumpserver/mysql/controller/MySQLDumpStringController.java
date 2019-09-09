@@ -52,7 +52,7 @@ public class MySQLDumpStringController {
     public void setDumpBaseInfo(){
         //System.out.println(rb.getString("mysql.server"));
         mysqlcom.setURL(rb.getString("mysql.server"),rb.getString("mysql.port"),rb.getString("mysql.user"), rb.getString("mysql.password"));
-        baseList=mysqlcom.queryAll("select * from easydump.databases where enable=1");
+        baseList=mysqlcom.queryAll("select * from easydump.dbs where enable=1");
         //Map<String, Object> aa=(Map)baseList.get(0);
         //System.out.println(aa.get("ip"));
     }
@@ -70,12 +70,12 @@ public class MySQLDumpStringController {
             //String aa=baseInfoMap.get("backuptable").toString();
             //System.out.println(aa);
             if(Integer.parseInt(baseInfoMap.get("backuptable").toString())==1){
-                tableList=mysqlcom.queryAll("select * from easydump.backuptables where databaseid="+baseInfoMap.get("id").toString());
+                tableList=mysqlcom.queryAll("select * from easydump.backuptables where dbid="+baseInfoMap.get("id").toString());
             }else if(Integer.parseInt(baseInfoMap.get("ignoretable").toString())==1){
-                tableList=mysqlcom.queryAll("select * from easydump.ignoretables where databaseid="+baseInfoMap.get("id").toString());
+                tableList=mysqlcom.queryAll("select * from easydump.ignoretables where dbid="+baseInfoMap.get("id").toString());
             }
             //检查备份库是否连通
-            mysqlcom.setURL(baseInfoMap.get("ip").toString(),baseInfoMap.get("port").toString(),
+            mysqlcom.setURL(baseInfoMap.get("host").toString(),baseInfoMap.get("port").toString(),
                     baseInfoMap.get("user").toString(), baseInfoMap.get("password").toString());
             boolean conn=mysqlcom.getConnection();
             if(conn){
@@ -117,15 +117,15 @@ public class MySQLDumpStringController {
         this.sbDump.append(File.separator).append(baseInfoMap.get("backupcmd").toString()).append(" ");
         this.sbDump.append(bkStrategy.getLockDB(baseInfoMap.get("code").toString()));
         //组合数据库连接基本信息字符串
-        this.sbDump.append("-h").append(baseInfoMap.get("ip").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
+        this.sbDump.append("-h").append(baseInfoMap.get("host").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
                .append(" --password=\"").append(baseInfoMap.get("password").toString()).append("\" --port=")
                .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString());
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
         //System.out.println(sbDump.toString());
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                .append(baseInfoMap.get("ip").toString()).append(File.separator)
+                .append(baseInfoMap.get("host").toString()).append(File.separator)
                 .append(baseInfoMap.get("database").toString()).append(File.separator);
-        this.sbInfo.append(" [ip]:").append(baseInfoMap.get("ip").toString()).append(",")
+        this.sbInfo.append(" [host]:").append(baseInfoMap.get("host").toString()).append(",")
                 .append("[db]:").append(baseInfoMap.get("database").toString());
         
         this.dao.addDump(this.sbDump.toString());        
@@ -143,14 +143,14 @@ public class MySQLDumpStringController {
         this.sbDump.append(File.separator).append(baseInfoMap.get("backupcmd").toString()).append(" ");
         this.sbDump.append(bkStrategy.getUnlockDB(baseInfoMap.get("code").toString()));
         //组合数据库连接基本信息字符串
-        this.sbDump.append("-h").append(baseInfoMap.get("ip").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
+        this.sbDump.append("-h").append(baseInfoMap.get("host").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
                .append(" --password=\"").append(baseInfoMap.get("password").toString()).append("\" --port=")
                .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString());
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                .append(baseInfoMap.get("ip").toString()).append(File.separator)
+                .append(baseInfoMap.get("host").toString()).append(File.separator)
                 .append(baseInfoMap.get("database").toString()).append(File.separator);
-        this.sbInfo.append(" [ip]").append(baseInfoMap.get("ip").toString()).append(",")
+        this.sbInfo.append(" [host]").append(baseInfoMap.get("host").toString()).append(",")
                 .append("[db]").append(baseInfoMap.get("database").toString());
         
         this.dao.addDump(this.sbDump.toString());        
@@ -168,14 +168,14 @@ public class MySQLDumpStringController {
         this.sbDump.append(File.separator).append(baseInfoMap.get("backupcmd").toString()).append(" ");
         this.sbDump.append(bkStrategy.getOnlyStruct(baseInfoMap.get("code").toString()));
         //组合数据库连接基本信息字符串
-        this.sbDump.append("-h").append(baseInfoMap.get("ip").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
+        this.sbDump.append("-h").append(baseInfoMap.get("host").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
                .append(" --password=\"").append(baseInfoMap.get("password").toString()).append("\" --port=")
                .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString());
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                .append(baseInfoMap.get("ip").toString()).append(File.separator)
+                .append(baseInfoMap.get("host").toString()).append(File.separator)
                 .append(baseInfoMap.get("database").toString()).append(File.separator);
-        this.sbInfo.append(" [ip]:").append(baseInfoMap.get("ip").toString()).append(",")
+        this.sbInfo.append(" [host]:").append(baseInfoMap.get("host").toString()).append(",")
                 .append("[db]:").append(baseInfoMap.get("database").toString());
         
         this.dao.addDump(this.sbDump.toString());        
@@ -193,14 +193,14 @@ public class MySQLDumpStringController {
         this.sbDump.append(File.separator).append(baseInfoMap.get("backupcmd").toString()).append(" ");
         this.sbDump.append(bkStrategy.getOnlyData(baseInfoMap.get("code").toString()));
         //组合数据库连接基本信息字符串
-        this.sbDump.append("-h").append(baseInfoMap.get("ip").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
+        this.sbDump.append("-h").append(baseInfoMap.get("host").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
                .append(" --password=\"").append(baseInfoMap.get("password").toString()).append("\" --port=")
                .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString());
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                .append(baseInfoMap.get("ip").toString()).append(File.separator)
+                .append(baseInfoMap.get("host").toString()).append(File.separator)
                 .append(baseInfoMap.get("database").toString()).append(File.separator);
-        this.sbInfo.append(" [ip]:").append(baseInfoMap.get("ip").toString()).append(",")
+        this.sbInfo.append(" [host]:").append(baseInfoMap.get("host").toString()).append(",")
                 .append("[db]:").append(baseInfoMap.get("database").toString());
         
         this.dao.addDump(this.sbDump.toString());        
@@ -218,7 +218,7 @@ public class MySQLDumpStringController {
         this.sbDump.append(File.separator).append(baseInfoMap.get("backupcmd").toString()).append(" ");
         this.sbDump.append(bkStrategy.getSplitTables(baseInfoMap.get("code").toString()));
         //组合数据库连接基本信息字符串
-        this.sbDump.append("-h").append(baseInfoMap.get("ip").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
+        this.sbDump.append("-h").append(baseInfoMap.get("host").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
                 .append(" --password=\"").append(baseInfoMap.get("password").toString()).append("\" --port=")
                 .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString()).append(" ");
         //System.out.println(sbDump.toString());
@@ -226,10 +226,10 @@ public class MySQLDumpStringController {
         // <editor-fold defaultstate="collapsed" desc="单独备份存储过程">
         sbDumpChanger.append(this.sbDump.toString()).append(this.bkStrategy.getProduce(baseInfoMap.get("code").toString()));
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                        .append(baseInfoMap.get("ip").toString()).append(File.separator)
+                        .append(baseInfoMap.get("host").toString()).append(File.separator)
                         .append(baseInfoMap.get("database").toString()).append(File.separator)
                         .append("produce").append(File.separator);
-        this.sbInfo.append(" [ip]:").append(baseInfoMap.get("ip").toString()).append(",")
+        this.sbInfo.append(" [host]:").append(baseInfoMap.get("host").toString()).append(",")
                      .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
                      .append("[produce]:").append("produce");
         this.dao.addDump(sbDumpChanger.toString());        
@@ -249,10 +249,10 @@ public class MySQLDumpStringController {
                 sbDumpChanger.append(tbMap.get("tablename"));
                 //System.out.println(sbDumpChanger.toString());
                 this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                        .append(baseInfoMap.get("ip").toString()).append(File.separator)
+                        .append(baseInfoMap.get("host").toString()).append(File.separator)
                         .append(baseInfoMap.get("database").toString()).append(File.separator)
                         .append(tbMap.get("tablename")).append(File.separator);
-                this.sbInfo.append(" [ip]:").append(baseInfoMap.get("ip").toString()).append(",")
+                this.sbInfo.append(" [host]:").append(baseInfoMap.get("host").toString()).append(",")
                      .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
                      .append("[table]:").append(tbMap.get("tablename"));
                 
@@ -267,7 +267,7 @@ public class MySQLDumpStringController {
             }
 
         }else if(Integer.parseInt(baseInfoMap.get("ignoretable").toString())==1 && tableList.size()>0){//分表备份指定表部分表不备份
-            mysqlcom.setURL(baseInfoMap.get("ip").toString(),baseInfoMap.get("port").toString(),baseInfoMap.get("user").toString(), baseInfoMap.get("password").toString());
+            mysqlcom.setURL(baseInfoMap.get("host").toString(),baseInfoMap.get("port").toString(),baseInfoMap.get("user").toString(), baseInfoMap.get("password").toString());
             List gettablelist=mysqlcom.getAllTables(baseInfoMap.get("database").toString());
             int i=tableList.size();
             int j=gettablelist.size();
@@ -286,12 +286,12 @@ public class MySQLDumpStringController {
                     sbDumpChanger.append("\"").append(gettablelist.get(j)).append("\"");
                     //System.out.println(sbDumpChanger.toString());
                     this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                            .append(baseInfoMap.get("ip").toString()).append(File.separator)
+                            .append(baseInfoMap.get("host").toString()).append(File.separator)
                             .append(baseInfoMap.get("database").toString()).append(File.separator)
                             .append(gettablelist.get(j)).append(File.separator);
-                    this.sbInfo.append(" [ip]:").append(baseInfoMap.get("ip").toString()).append(",")
+                    this.sbInfo.append(" [host]:").append(baseInfoMap.get("host").toString()).append(",")
                             .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
-                            .append("[table]:").append(sbDumpChanger.toString());
+                            .append("[table]:").append(gettablelist.get(j));
                     
                     this.dao.addDump(sbDumpChanger.toString());        
                     this.dao.addDumpPath(this.sbDumpPath.toString());
@@ -306,7 +306,7 @@ public class MySQLDumpStringController {
             }
             gettablelist.clear();
         }else{//分表备份所有的表
-            mysqlcom.setURL(baseInfoMap.get("ip").toString(),baseInfoMap.get("port").toString(),baseInfoMap.get("user").toString(), baseInfoMap.get("password").toString());
+            mysqlcom.setURL(baseInfoMap.get("host").toString(),baseInfoMap.get("port").toString(),baseInfoMap.get("user").toString(), baseInfoMap.get("password").toString());
             List gettablelist=mysqlcom.getAllTables(baseInfoMap.get("database").toString());
             int j=gettablelist.size();
             while(--j>=0){
@@ -314,10 +314,10 @@ public class MySQLDumpStringController {
                 sbDumpChanger.append("\"").append(gettablelist.get(j)).append("\"");
                 //System.out.println(sbDumpChanger.toString());
                 this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                    .append(baseInfoMap.get("ip").toString()).append(File.separator)
+                    .append(baseInfoMap.get("host").toString()).append(File.separator)
                     .append(baseInfoMap.get("database").toString()).append(File.separator)
                     .append(gettablelist.get(j)).append(File.separator);
-                this.sbInfo.append(" [ip]:").append(baseInfoMap.get("ip").toString()).append(",")
+                this.sbInfo.append(" [host]:").append(baseInfoMap.get("host").toString()).append(",")
                     .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
                     .append("[table]:").append(gettablelist.get(j));
                 
