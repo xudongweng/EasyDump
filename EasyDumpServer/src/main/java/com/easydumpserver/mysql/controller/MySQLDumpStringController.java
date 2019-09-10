@@ -113,12 +113,13 @@ public class MySQLDumpStringController {
     // <editor-fold defaultstate="collapsed" desc="组合每种备份策略的备份字符串">
     //锁表备份
     private void setLockDBDump(Map<String, Object> baseInfoMap,List tableList){
-        this.sbDump.append(rb.getString("mysql.binpath"));
-        this.sbDump.append(File.separator).append(baseInfoMap.get("backupcmd").toString()).append(" ");
+        if(!rb.getString("mysql.binpath").equals(""))
+            this.sbDump.append(rb.getString("mysql.binpath")).append(File.separator);
+        this.sbDump.append(baseInfoMap.get("backupcmd").toString()).append(" ");
         this.sbDump.append(bkStrategy.getLockDB(baseInfoMap.get("code").toString()));
         //组合数据库连接基本信息字符串
         this.sbDump.append("-h").append(baseInfoMap.get("host").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
-               .append(" --password=\"").append(baseInfoMap.get("password").toString()).append("\" --port=")
+               .append(" --password=").append(baseInfoMap.get("password").toString()).append(" --port=")
                .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString());
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
         //System.out.println(sbDump.toString());
@@ -139,12 +140,13 @@ public class MySQLDumpStringController {
     }
     //不锁表备份
     private void setUnlockDBDump(Map<String, Object> baseInfoMap,List tableList){
-        this.sbDump.append(rb.getString("mysql.binpath"));
-        this.sbDump.append(File.separator).append(baseInfoMap.get("backupcmd").toString()).append(" ");
+        if(!rb.getString("mysql.binpath").equals(""))
+            this.sbDump.append(rb.getString("mysql.binpath")).append(File.separator);
+        this.sbDump.append(baseInfoMap.get("backupcmd").toString()).append(" ");
         this.sbDump.append(bkStrategy.getUnlockDB(baseInfoMap.get("code").toString()));
         //组合数据库连接基本信息字符串
         this.sbDump.append("-h").append(baseInfoMap.get("host").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
-               .append(" --password=\"").append(baseInfoMap.get("password").toString()).append("\" --port=")
+               .append(" --password=").append(baseInfoMap.get("password").toString()).append(" --port=")
                .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString());
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
@@ -164,12 +166,13 @@ public class MySQLDumpStringController {
     }
     //仅备份表结构
     private void setOnlyStructDump(Map<String, Object> baseInfoMap,List tableList){
-        this.sbDump.append(rb.getString("mysql.binpath"));
-        this.sbDump.append(File.separator).append(baseInfoMap.get("backupcmd").toString()).append(" ");
+        if(!rb.getString("mysql.binpath").equals(""))
+            this.sbDump.append(rb.getString("mysql.binpath")).append(File.separator);
+        this.sbDump.append(baseInfoMap.get("backupcmd").toString()).append(" ");
         this.sbDump.append(bkStrategy.getOnlyStruct(baseInfoMap.get("code").toString()));
         //组合数据库连接基本信息字符串
         this.sbDump.append("-h").append(baseInfoMap.get("host").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
-               .append(" --password=\"").append(baseInfoMap.get("password").toString()).append("\" --port=")
+               .append(" --password=").append(baseInfoMap.get("password").toString()).append(" --port=")
                .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString());
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
@@ -189,12 +192,13 @@ public class MySQLDumpStringController {
     }
     //仅备份表数据，insert语句
     private void setOnlyDataDump(Map<String, Object> baseInfoMap,List tableList){
-        this.sbDump.append(rb.getString("mysql.binpath"));
-        this.sbDump.append(File.separator).append(baseInfoMap.get("backupcmd").toString()).append(" ");
+        if(!rb.getString("mysql.binpath").equals(""))
+            this.sbDump.append(rb.getString("mysql.binpath")).append(File.separator);
+        this.sbDump.append(baseInfoMap.get("backupcmd").toString()).append(" ");
         this.sbDump.append(bkStrategy.getOnlyData(baseInfoMap.get("code").toString()));
         //组合数据库连接基本信息字符串
         this.sbDump.append("-h").append(baseInfoMap.get("host").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
-               .append(" --password=\"").append(baseInfoMap.get("password").toString()).append("\" --port=")
+               .append(" --password=").append(baseInfoMap.get("password").toString()).append(" --port=")
                .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString());
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList));
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
@@ -214,12 +218,13 @@ public class MySQLDumpStringController {
     }
     //分表备份
     private void setSplitTablesDump(Map<String, Object> baseInfoMap,List tableList){
-        this.sbDump.append(rb.getString("mysql.binpath"));
-        this.sbDump.append(File.separator).append(baseInfoMap.get("backupcmd").toString()).append(" ");
+        if(!rb.getString("mysql.binpath").equals(""))
+            this.sbDump.append(rb.getString("mysql.binpath")).append(File.separator);
+        this.sbDump.append(baseInfoMap.get("backupcmd").toString()).append(" ");
         this.sbDump.append(bkStrategy.getSplitTables(baseInfoMap.get("code").toString()));
         //组合数据库连接基本信息字符串
         this.sbDump.append("-h").append(baseInfoMap.get("host").toString()).append(" --user=").append(baseInfoMap.get("user").toString())
-                .append(" --password=\"").append(baseInfoMap.get("password").toString()).append("\" --port=")
+                .append(" --password=").append(baseInfoMap.get("password").toString()).append(" --port=")
                 .append(baseInfoMap.get("port").toString()).append(" ").append(baseInfoMap.get("database").toString()).append(" ");
         //System.out.println(sbDump.toString());
         StringBuilder sbDumpChanger=new StringBuilder();
@@ -316,7 +321,7 @@ public class MySQLDumpStringController {
                 int row=mysqlcom.querySize("SELECT * FROM "+rb.getString("mysql.database")+".ignoretables WHERE dbid="+baseInfoMap.get("id").toString()+" AND tablename='"
                 +gettablelist.get(j)+"'");
                 if(row==0){
-                    sbDumpChanger.append("\"").append(gettablelist.get(j)).append("\"");
+                    sbDumpChanger.append(gettablelist.get(j));
                     //System.out.println(sbDumpChanger.toString());
                     this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
                             .append(baseInfoMap.get("host").toString()).append(File.separator)
@@ -342,7 +347,7 @@ public class MySQLDumpStringController {
             int j=gettablelist.size();
             while(--j>=0){
                 sbDumpChanger.append(this.sbDump.toString());
-                sbDumpChanger.append("\"").append(gettablelist.get(j)).append("\"");
+                sbDumpChanger.append(gettablelist.get(j));
                 //System.out.println(sbDumpChanger.toString());
                 this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
                     .append(baseInfoMap.get("host").toString()).append(File.separator)
@@ -376,13 +381,13 @@ public class MySQLDumpStringController {
             sbDump.append(" --tables");
             while(--i>=0){
                 Map<String, Object> tableListMap=(Map)tableList.get(i);
-                sbDump.append(" ").append("\"").append(tableListMap.get("tablename").toString()).append("\"");
+                sbDump.append(" ").append(tableListMap.get("tablename").toString());
             }
         }else if(Integer.parseInt(baseInfoMap.get("ignoretable").toString())==1 && tableList.size()>0){
             int i=tableList.size();
             while(--i>=0){
                 Map<String, Object> tableListMap=(Map)tableList.get(i);
-                sbDump.append(" --ignore-table=").append(baseInfoMap.get("database").toString()).append(".").append("\"").append(tableListMap.get("tablename").toString()).append("\"");
+                sbDump.append(" --ignore-table=").append(baseInfoMap.get("database").toString()).append(".").append(tableListMap.get("tablename").toString());
             }
         }
         return sbDump.toString();
