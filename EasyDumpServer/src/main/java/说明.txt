@@ -2,3 +2,5 @@ jdk12
 需要运行SQL:easydump.sql
 初始配置文件:config.properties
 运行命令:java -cp EasyDumpServer-1.0-SNAPSHOT-jar-with-dependencies.jar com.easydumpserver.EasyDumpTool
+maven编译问题：建议调整NetBeans -> Tools -> Options -> Java -> Maven -> Dependencies -> Dependency Down Strategy全部选择Every Project Open
+另外需要将config.properties与log4j.properties放在target下的classes下面

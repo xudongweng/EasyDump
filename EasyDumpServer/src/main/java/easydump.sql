@@ -58,8 +58,8 @@ CREATE TABLE `dbs` (
 -- ----------------------------
 -- Records of databases
 -- ----------------------------
-INSERT INTO `dbs` VALUES ('1', 'localhost', 'mysql', 'root', '123456', '3306', 'backup', '3', '4', '0', '0', 'utf8', 'mysqldump', '1');
-INSERT INTO `dbs` VALUES ('2', 'localhost', 'performance_schema', 'root', '123456', '3306', 'backup', '3', '4', '0', '0', 'utf8', 'mysqldump', '1');
+INSERT INTO `dbs` VALUES (1, 'localhost', 'mysql', 'root', '123456', '3306', 'backup', '3', '4', '0', '0', 'utf8', 'mysqldump', '1');
+INSERT INTO `dbs` VALUES (2, 'localhost', 'performance_schema', 'root', '123456', '3306', 'backup', '3', '4', '0', '0', 'utf8', 'mysqldump', '1');
 
 -- ----------------------------
 -- Table structure for ignoretables

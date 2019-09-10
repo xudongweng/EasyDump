@@ -56,6 +56,7 @@ public class MySQLBackupController {
             try{
                 String datetime=df.format(new Date());
                 log.info(" Backup Startup --"+logInfoList.get(i).toString());
+                //log.info(dumpList.get(i).toString());
                 InputStream in = Runtime.getRuntime().exec(dumpList.get(i).toString()).getInputStream();
                 fh.createPath(dumpPathList.get(i).toString());
                 zuh.zipStreamCompress(in, dumpPathList.get(i).toString(), datetime+".sql",datetime);
@@ -90,6 +91,7 @@ public class MySQLBackupController {
         SimpleDateFormat df=new SimpleDateFormat("yyyyMMddHHmmss");
         FileHelper fh=new FileHelper();
         while(--i>=0){
+            //log.info(dumpList.get(i).toString());
             fh.createPath(dumpPathList.get(i).toString());
             BackupThread bt=new BackupThread(dumpList.get(i).toString(),dumpPathList.get(i).toString(),df.format(new Date()),zuh,this.log
                     ,logInfoList.get(i).toString());
