@@ -24,7 +24,7 @@ CREATE TABLE `backuptables` (
   `dbid` mediumint(4) unsigned DEFAULT NULL,
   `tablename` varchar(70) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 -- ----------------------------
 -- Records of backuptables
@@ -39,27 +39,27 @@ INSERT INTO `backuptables` VALUES ('4', '2', 'events_statements_summary_by_accou
 DROP TABLE IF EXISTS `dbs`;
 CREATE TABLE `dbs` (
   `id` mediumint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `host` varchar(50) NOT NULL,
+  `host` varchar(50) NOT NULL DEFAULT 'localhost',
   `database` varchar(20) NOT NULL,
-  `user` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `port` mediumint(5) unsigned NOT NULL,
+  `user` varchar(20) NOT NULL DEFAULT '',
+  `password` varchar(20) NOT NULL DEFAULT '',
+  `port` mediumint(8) unsigned NOT NULL DEFAULT '27017',
+  `authdb` varchar(20) NOT NULL DEFAULT 'admin' COMMENT '验证数据库',
   `backuppath` varchar(200) NOT NULL DEFAULT 'backup',
   `filenum` smallint(1) unsigned NOT NULL DEFAULT '7' COMMENT '备份文件数量',
-  `strategy` smallint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0:getLockDB,1:getUnlockDB,2:getOnlyStruct,3:getOnlyData,4:getSplitTables',
+  `strategy` smallint(1) unsigned NOT NULL DEFAULT '1' COMMENT '0:getUnlockDB,1:getSplitTables',
   `backuptable` smallint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0:不指定备份表,1:指定备份表',
   `ignoretable` smallint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0:不指定忽略表,1:指定忽略表',
-  `code` varchar(20) NOT NULL DEFAULT 'utf8',
-  `backupcmd` enum('mysqlpump','mysqldump') NOT NULL DEFAULT 'mysqldump',
+  `backupcmd` varchar(20) NOT NULL DEFAULT 'mongodump',
   `enable` smallint(1) unsigned NOT NULL DEFAULT '1' COMMENT '1：表示开启备份 0：表示关闭备份',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 -- ----------------------------
--- Records of databases
+-- Records of dbs
 -- ----------------------------
-INSERT INTO `dbs` VALUES (1, 'localhost', 'mysql', 'root', '123456', '3306', 'backup', '3', '4', '0', '0', 'utf8', 'mysqldump', '1');
-INSERT INTO `dbs` VALUES (2, 'localhost', 'performance_schema', 'root', '123456', '3306', 'backup', '3', '4', '0', '0', 'utf8', 'mysqldump', '1');
+INSERT INTO `dbs` VALUES ('1', 'localhost', 'mymongo', '', '', '27017', 'admin', 'backup', '3', '1', '0', '0', 'mysqldump', '1');
+INSERT INTO `dbs` VALUES ('2', 'localhost', 'mymongo1', '', '', '27017', 'admin', 'backup', '3', '1', '0', '0', 'mysqldump', '1');
 
 -- ----------------------------
 -- Table structure for ignoretables
@@ -70,7 +70,7 @@ CREATE TABLE `ignoretables` (
   `dbid` mediumint(4) unsigned DEFAULT NULL,
   `tablename` varchar(70) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 -- ----------------------------
 -- Records of ignoretables
