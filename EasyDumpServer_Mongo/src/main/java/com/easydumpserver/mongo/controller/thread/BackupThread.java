@@ -5,9 +5,8 @@
  */
 package com.easydumpserver.mongo.controller.thread;
 
-import com.easydumpserver.helper.compress.ZipUtilsHelper;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import org.apache.log4j.Logger;
 
 /**
@@ -16,26 +15,21 @@ import org.apache.log4j.Logger;
  */
 public class BackupThread extends Thread{
     private String dummp="";
-    private String dumpPath="";
-    private String datetime="";
-    private ZipUtilsHelper zuh=null;
     private Logger log=null;
     private String logInfo="";
-
-    public BackupThread(String dump,String dumpPath,String datetime,ZipUtilsHelper zuh,Logger log,String logInfo){
+    private String datetime="";
+    
+    public BackupThread(String dump,String datetime,Logger log,String logInfo){
         this.dummp=dump;
-        this.dumpPath=dumpPath;
-        this.datetime=datetime;
-        this.zuh=zuh;
         this.log=log;
         this.logInfo=logInfo;
+        this.datetime=datetime;
     }
     @Override
     public void run() {
         try{
             log.info(" Backup startup --"+this.logInfo);
-            InputStream in = Runtime.getRuntime().exec(this.dummp).getInputStream();
-            zuh.zipStreamCompress(in, this.dumpPath, datetime+".bson",datetime);
+            Runtime.getRuntime().exec(this.dummp+this.datetime);
             log.info(" Backup finished --"+this.logInfo);
         }catch(IOException e){
             log.error(e.toString());

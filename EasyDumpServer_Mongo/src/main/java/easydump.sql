@@ -58,8 +58,8 @@ CREATE TABLE `dbs` (
 -- ----------------------------
 -- Records of dbs
 -- ----------------------------
-INSERT INTO `dbs` VALUES ('1', 'localhost', 'mymongo', '', '', '27017', 'admin', 'backup', '3', '1', '0', '0', 'mysqldump', '1');
-INSERT INTO `dbs` VALUES ('2', 'localhost', 'mymongo1', '', '', '27017', 'admin', 'backup', '3', '1', '0', '0', 'mysqldump', '1');
+INSERT INTO `dbs` VALUES ('1', 'localhost', 'mymongo', '', '', '27017', 'admin', 'backup', '3', '1', '0', '0', 'mongodump', '1');
+INSERT INTO `dbs` VALUES ('2', 'localhost', 'mymongo1', '', '', '27017', 'admin', 'backup', '3', '1', '0', '0', 'mongodump', '1');
 
 -- ----------------------------
 -- Table structure for ignoretables

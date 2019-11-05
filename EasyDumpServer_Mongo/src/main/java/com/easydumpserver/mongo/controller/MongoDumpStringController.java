@@ -120,21 +120,20 @@ public class MongoDumpStringController {
         this.sbDump.append(baseInfoMap.get("backupcmd").toString()).append(" ");
         //组合数据库连接基本信息字符串
         if(baseInfoMap.get("user").toString().equals(""))
-            this.sbDump.append("-h").append(baseInfoMap.get("host").toString()).append(" --port ").append(baseInfoMap.get("port").toString())
-                   .append(" -d ").append(baseInfoMap.get("database").toString()).append(" ");
+            this.sbDump.append("-h ").append(baseInfoMap.get("host").toString()).append(" --port ").append(baseInfoMap.get("port").toString())
+                   .append(" -d ").append(baseInfoMap.get("database").toString()).append(" --gzip ");
         else
-            this.sbDump.append("-h").append(baseInfoMap.get("host").toString()).append(" -u ").append(baseInfoMap.get("user").toString())
+            this.sbDump.append("-h ").append(baseInfoMap.get("host").toString()).append(" -u ").append(baseInfoMap.get("user").toString())
                    .append(" -p ").append(baseInfoMap.get("password").toString()).append(" --port ").append(baseInfoMap.get("port").toString())
                    .append(baseInfoMap.get(" --authenticationDatabase ").toString()).append(baseInfoMap.get("authdb").toString())
-                   .append(" -d ").append(baseInfoMap.get("database").toString()).append(" ");
+                   .append(" -d ").append(baseInfoMap.get("database").toString()).append(" --gzip ");
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList,mongotbmap));
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                .append(baseInfoMap.get("host").toString()).append(File.separator)
-                .append(baseInfoMap.get("database").toString()).append(File.separator);
+                .append(baseInfoMap.get("host").toString()).append(File.separator);
         this.sbInfo.append(" [host]").append(baseInfoMap.get("host").toString()).append(",")
                 .append("[db]").append(baseInfoMap.get("database").toString());
         
-        this.dao.addDump(this.sbDump.toString());        
+        this.dao.addDump(this.sbDump.append(" -o ").append(this.sbDumpPath.toString()).toString());        
         this.dao.addDumpPath(this.sbDumpPath.toString());
         this.dao.addLogInfo(this.sbInfo.toString());
         this.dao.addFileNum(Integer.parseInt(baseInfoMap.get("filenum").toString()));
@@ -151,13 +150,13 @@ public class MongoDumpStringController {
         this.sbDump.append(baseInfoMap.get("backupcmd").toString()).append(" ");
         //组合数据库连接基本信息字符串
         if(baseInfoMap.get("user").toString().equals(""))
-            this.sbDump.append("-h").append(baseInfoMap.get("host").toString()).append(" --port ").append(baseInfoMap.get("port").toString())
-                   .append(" -d ").append(baseInfoMap.get("database").toString()).append(" ");
+            this.sbDump.append("-h ").append(baseInfoMap.get("host").toString()).append(" --port ").append(baseInfoMap.get("port").toString())
+                   .append(" -d ").append(baseInfoMap.get("database").toString()).append(" --gzip ");
         else
-            this.sbDump.append("-h").append(baseInfoMap.get("host").toString()).append(" -u ").append(baseInfoMap.get("user").toString())
+            this.sbDump.append("-h ").append(baseInfoMap.get("host").toString()).append(" -u ").append(baseInfoMap.get("user").toString())
                    .append(" -p ").append(baseInfoMap.get("password").toString()).append(" --port ").append(baseInfoMap.get("port").toString())
                    .append(baseInfoMap.get(" --authenticationDatabase ").toString()).append(baseInfoMap.get("authdb").toString())
-                   .append(" -d ").append(baseInfoMap.get("database").toString()).append(" ");
+                   .append(" -d ").append(baseInfoMap.get("database").toString()).append(" --gzip ");
         //System.out.println(sbDump.toString());
         StringBuilder sbDumpChanger=new StringBuilder();
 
@@ -169,14 +168,12 @@ public class MongoDumpStringController {
                 sbDumpChanger.append(" -c ").append(tbMap.get("tablename")).append(" ");
                 //System.out.println(sbDumpChanger.toString());
                 this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                        .append(baseInfoMap.get("host").toString()).append(File.separator)
-                        .append(baseInfoMap.get("database").toString()).append(File.separator)
-                        .append(tbMap.get("tablename")).append(File.separator);
+                        .append(baseInfoMap.get("host").toString()).append(File.separator);
                 this.sbInfo.append(" [host]:").append(baseInfoMap.get("host").toString()).append(",")
                      .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
                      .append("[table]:").append(tbMap.get("tablename"));
                 
-                this.dao.addDump(sbDumpChanger.toString());        
+                this.dao.addDump(sbDumpChanger.append(" -o ").append(this.sbDumpPath.toString()).toString());        
                 this.dao.addDumpPath(this.sbDumpPath.toString());
                 this.dao.addLogInfo(this.sbInfo.toString());
                 this.dao.addFileNum(Integer.parseInt(baseInfoMap.get("filenum").toString()));
@@ -198,13 +195,11 @@ public class MongoDumpStringController {
                 sbDumpChanger.append(this.sbDump.toString());
                 sbDumpChanger.append(" -c ").append(t).append(" ");
                 this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                        .append(baseInfoMap.get("host").toString()).append(File.separator)
-                        .append(baseInfoMap.get("database").toString()).append(File.separator)
-                        .append(t).append(File.separator);
+                        .append(baseInfoMap.get("host").toString()).append(File.separator);
                 this.sbInfo.append(" [host]:").append(baseInfoMap.get("host").toString()).append(",")
                         .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
                         .append("[table]:").append(t);
-                this.dao.addDump(sbDumpChanger.toString());        
+                this.dao.addDump(sbDumpChanger.append(" -o ").append(this.sbDumpPath.toString()).toString());        
                 this.dao.addDumpPath(this.sbDumpPath.toString());
                 this.dao.addLogInfo(this.sbInfo.toString());
                 this.dao.addFileNum(Integer.parseInt(baseInfoMap.get("filenum").toString()));
@@ -218,14 +213,12 @@ public class MongoDumpStringController {
                 sbDumpChanger.append(this.sbDump.toString());
                 sbDumpChanger.append(" -c ").append(t).append(" ");
                 this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                    .append(baseInfoMap.get("host").toString()).append(File.separator)
-                    .append(baseInfoMap.get("database").toString()).append(File.separator)
-                    .append(t).append(File.separator);
+                    .append(baseInfoMap.get("host").toString()).append(File.separator);
                 this.sbInfo.append(" [host]:").append(baseInfoMap.get("host").toString()).append(",")
                     .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
                     .append("[table]:").append(t);
                 
-                this.dao.addDump(sbDumpChanger.toString());        
+                this.dao.addDump(sbDumpChanger.append(" -o ").append(this.sbDumpPath.toString()).toString());        
                 this.dao.addDumpPath(this.sbDumpPath.toString());
                 this.dao.addLogInfo(this.sbInfo.toString());
                 this.dao.addFileNum(Integer.parseInt(baseInfoMap.get("filenum").toString()));
@@ -243,8 +236,6 @@ public class MongoDumpStringController {
     //设置单独备份或忽略的表的字符串
     private String setBkIgnTable(Map<String, Object> baseInfoMap,List tableList,Map<String, String> mongotbmap){
         StringBuilder sbDump=new StringBuilder();
-        
-        
         if(Integer.parseInt(baseInfoMap.get("backuptable").toString())==1 && tableList.size()>0){
             int i=tableList.size();
             
