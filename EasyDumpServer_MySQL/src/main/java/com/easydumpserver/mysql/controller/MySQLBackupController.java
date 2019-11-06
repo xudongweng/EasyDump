@@ -66,7 +66,7 @@ public class MySQLBackupController {
                 log.error(e.toString());
             }
             //删除过期文件
-            if(fh.getFileNum(dumpPathList.get(i).toString())>Integer.parseInt(numberList.get(i).toString())){
+            if(fh.getFileNum(dumpPathList.get(i).toString())>=Integer.parseInt(numberList.get(i).toString())){
                 //System.out.println(fh.getOlderFile(dumpPathList.get(i).toString()));
                 String filename=fh.getOlderFile(dumpPathList.get(i).toString());
                 log.info("Prepare to delete expire "+filename);
@@ -97,7 +97,7 @@ public class MySQLBackupController {
                     ,logInfoList.get(i).toString());
             poolbk.execute(bt);
             //删除过期文件
-            if(fh.getFileNum(dumpPathList.get(i).toString())>Integer.parseInt(numberList.get(i).toString())){
+            if(fh.getFileNum(dumpPathList.get(i).toString())>=Integer.parseInt(numberList.get(i).toString())){
                 //System.out.println(fh.getOlderFile(dumpPathList.get(i).toString()));
                 String filename=fh.getOlderFile(dumpPathList.get(i).toString());
                 log.info("Prepare to delete expire "+filename);

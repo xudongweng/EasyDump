@@ -8,7 +8,6 @@ package com.easydumpserver.mongo.controller;
 import com.easydumpserver.helper.file.FileHelper;
 import com.easydumpserver.mongo.controller.thread.BackupThread;
 import com.easydumpserver.mongo.model.DumpArrObject;
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -67,7 +66,7 @@ public class MongoBackupController {
                 //System.out.println(fh.getOlderFile(dumpPathList.get(i).toString()));
                 String filename=fh.getOlderFile(dumpPathList.get(i).toString());
                 log.info("Prepare to delete expire "+filename);
-                if(fh.deleteFile(filename)){
+                if(fh.deleteFolder(filename)){
                     log.info("Delete "+filename + " is sucess");
                 }else{
                     log.warn("Delete "+filename + " is failure");
@@ -93,11 +92,11 @@ public class MongoBackupController {
             BackupThread bt=new BackupThread(dumpList.get(i).toString(),datetime,this.log,logInfoList.get(i).toString());
             poolbk.execute(bt);
             //删除过期文件
-            if(fh.getFileNum(dumpPathList.get(i).toString())>Integer.parseInt(numberList.get(i).toString())){
+            if(fh.getFileNum(dumpPathList.get(i).toString())>=Integer.parseInt(numberList.get(i).toString())){
                 //System.out.println(fh.getOlderFile(dumpPathList.get(i).toString()));
                 String filename=fh.getOlderFile(dumpPathList.get(i).toString());
                 log.info("Prepare to delete expire "+filename);
-                if(fh.deleteFile(filename)){
+                if(fh.deleteFolder(filename)){
                     log.info("Delete "+filename + " is sucess");
                 }else{
                     log.warn("Delete "+filename + " is failure");

@@ -82,7 +82,8 @@ public class MongoDumpStringController {
             }
             else{
                 mongocom.setUrl(baseInfoMap.get("user").toString()+":"+baseInfoMap.get("password").toString()+"@"+baseInfoMap.get("host").toString()+":"+baseInfoMap.get("port").toString()
-                        , baseInfoMap.get("authdb").toString());
+                        +"/"+ baseInfoMap.get("authdb").toString()
+                        , baseInfoMap.get("database").toString());
                 mongotbmap=mongocom.getTables(baseInfoMap.get("database").toString());
             }
             //判断mongodb确实有需要备份的集合
@@ -125,11 +126,12 @@ public class MongoDumpStringController {
         else
             this.sbDump.append("-h ").append(baseInfoMap.get("host").toString()).append(" -u ").append(baseInfoMap.get("user").toString())
                    .append(" -p ").append(baseInfoMap.get("password").toString()).append(" --port ").append(baseInfoMap.get("port").toString())
-                   .append(baseInfoMap.get(" --authenticationDatabase ").toString()).append(baseInfoMap.get("authdb").toString())
+                   .append(" --authenticationDatabase ").append(baseInfoMap.get("authdb").toString())
                    .append(" -d ").append(baseInfoMap.get("database").toString()).append(" --gzip ");
         this.sbDump.append(this.setBkIgnTable(baseInfoMap, tableList,mongotbmap));
         this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                .append(baseInfoMap.get("host").toString()).append(File.separator);
+                .append(baseInfoMap.get("host").toString()).append(File.separator)
+                .append(baseInfoMap.get("database").toString()).append(File.separator);
         this.sbInfo.append(" [host]").append(baseInfoMap.get("host").toString()).append(",")
                 .append("[db]").append(baseInfoMap.get("database").toString());
         
@@ -155,7 +157,7 @@ public class MongoDumpStringController {
         else
             this.sbDump.append("-h ").append(baseInfoMap.get("host").toString()).append(" -u ").append(baseInfoMap.get("user").toString())
                    .append(" -p ").append(baseInfoMap.get("password").toString()).append(" --port ").append(baseInfoMap.get("port").toString())
-                   .append(baseInfoMap.get(" --authenticationDatabase ").toString()).append(baseInfoMap.get("authdb").toString())
+                   .append(" --authenticationDatabase ").append(baseInfoMap.get("authdb").toString())
                    .append(" -d ").append(baseInfoMap.get("database").toString()).append(" --gzip ");
         //System.out.println(sbDump.toString());
         StringBuilder sbDumpChanger=new StringBuilder();
@@ -168,7 +170,8 @@ public class MongoDumpStringController {
                 sbDumpChanger.append(" -c ").append(tbMap.get("tablename")).append(" ");
                 //System.out.println(sbDumpChanger.toString());
                 this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                        .append(baseInfoMap.get("host").toString()).append(File.separator);
+                        .append(baseInfoMap.get("host").toString()).append(File.separator)
+                        .append(baseInfoMap.get("database").toString()).append(File.separator);
                 this.sbInfo.append(" [host]:").append(baseInfoMap.get("host").toString()).append(",")
                      .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
                      .append("[table]:").append(tbMap.get("tablename"));
@@ -195,7 +198,8 @@ public class MongoDumpStringController {
                 sbDumpChanger.append(this.sbDump.toString());
                 sbDumpChanger.append(" -c ").append(t).append(" ");
                 this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                        .append(baseInfoMap.get("host").toString()).append(File.separator);
+                        .append(baseInfoMap.get("host").toString()).append(File.separator)
+                        .append(baseInfoMap.get("database").toString()).append(File.separator);
                 this.sbInfo.append(" [host]:").append(baseInfoMap.get("host").toString()).append(",")
                         .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
                         .append("[table]:").append(t);
@@ -213,7 +217,8 @@ public class MongoDumpStringController {
                 sbDumpChanger.append(this.sbDump.toString());
                 sbDumpChanger.append(" -c ").append(t).append(" ");
                 this.sbDumpPath.append(baseInfoMap.get("backuppath").toString()).append(File.separator)
-                    .append(baseInfoMap.get("host").toString()).append(File.separator);
+                    .append(baseInfoMap.get("host").toString()).append(File.separator)
+                    .append(baseInfoMap.get("database").toString()).append(File.separator);
                 this.sbInfo.append(" [host]:").append(baseInfoMap.get("host").toString()).append(",")
                     .append("[db]:").append(baseInfoMap.get("database").toString()).append(",")
                     .append("[table]:").append(t);

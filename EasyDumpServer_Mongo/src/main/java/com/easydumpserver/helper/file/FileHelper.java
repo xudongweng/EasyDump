@@ -39,7 +39,10 @@ public class FileHelper {
             if(folder.listFiles().length>0){
                 File[] files=folder.listFiles();
                 for(File file:files){
-                    file.delete();
+                    if(file.isDirectory())
+                        this.deleteFolder(directory+File.separator+file.getName());
+                    else
+                        file.delete();
                 }
             }
             folder.delete();
