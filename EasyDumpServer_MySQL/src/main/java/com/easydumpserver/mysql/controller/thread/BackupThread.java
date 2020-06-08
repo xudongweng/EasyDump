@@ -5,7 +5,7 @@
  */
 package com.easydumpserver.mysql.controller.thread;
 
-import com.easydumpserver.helper.compress.ZipUtilsHelper;
+import com.easydumpserver.helper.compress.ZipStreamHelper;
 import java.io.IOException;
 import java.io.InputStream;
 import org.apache.log4j.Logger;
@@ -18,11 +18,11 @@ public class BackupThread extends Thread{
     private String dummp="";
     private String dumpPath="";
     private String datetime="";
-    private ZipUtilsHelper zuh=null;
+    private ZipStreamHelper zuh=null;
     private Logger log=null;
     private String logInfo="";
 
-    public BackupThread(String dump,String dumpPath,String datetime,ZipUtilsHelper zuh,Logger log,String logInfo){
+    public BackupThread(String dump,String dumpPath,String datetime,ZipStreamHelper zuh,Logger log,String logInfo){
         this.dummp=dump;
         this.dumpPath=dumpPath;
         this.datetime=datetime;

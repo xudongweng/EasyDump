@@ -18,12 +18,12 @@ import org.apache.log4j.Logger;
  *
  * @author sheriff
  */
-public class ZipUtilsHelper {
+public class ZipStreamHelper {
     private Logger log=null;
     private int buffsize=1024*4;
     
-    public ZipUtilsHelper(){
-        this.log=Logger.getLogger(ZipUtilsHelper.class);
+    public ZipStreamHelper(){
+        this.log=Logger.getLogger(ZipStreamHelper.class);
     }
     
     public void zipStreamCompress(InputStream in,String destPath,String filename,String zipname){

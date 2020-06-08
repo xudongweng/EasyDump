@@ -5,7 +5,7 @@
  */
 package com.easydumpserver.mysql.controller;
 
-import com.easydumpserver.helper.compress.ZipUtilsHelper;
+import com.easydumpserver.helper.compress.ZipStreamHelper;
 import com.easydumpserver.helper.file.FileHelper;
 import com.easydumpserver.mysql.controller.thread.BackupThread;
 import com.easydumpserver.mysql.model.DumpArrObject;
@@ -49,7 +49,7 @@ public class MySQLBackupController {
         List logInfoList=dao.getLogInfo();
         
         int i=dumpList.size();
-        ZipUtilsHelper zuh=new ZipUtilsHelper();
+        ZipStreamHelper zuh=new ZipStreamHelper();
         SimpleDateFormat df=new SimpleDateFormat("yyyyMMddHHmmss");
         FileHelper fh=new FileHelper();
         while(--i>=0){
@@ -87,7 +87,7 @@ public class MySQLBackupController {
         List logInfoList=dao.getLogInfo();
         
         int i=dumpList.size();
-        ZipUtilsHelper zuh=new ZipUtilsHelper();
+        ZipStreamHelper zuh=new ZipStreamHelper();
         SimpleDateFormat df=new SimpleDateFormat("yyyyMMddHHmmss");
         FileHelper fh=new FileHelper();
         while(--i>=0){
